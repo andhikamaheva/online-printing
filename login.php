@@ -25,7 +25,7 @@ if(isset($_POST["submit"])){
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>DevOOPS</title>
+		<title>.:: Login Administrator ::.</title>
 		<meta name="description" content="description">
 		<meta name="author" content="Evgeniya">
 		<meta name="keyword" content="keywords">
@@ -45,9 +45,7 @@ if(isset($_POST["submit"])){
 <div class="container-fluid">
 	<div id="page-login" class="row">
 		<div class="col-xs-12 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
-			<div class="text-right">
-				<a href="page_register.html" class="txt-default">Need an account?</a>
-			</div>
+		<img src="img/logo-200.png" class="img-login"/>
 			<div class="box">
 				<div class="box-content">
 					<div class="text-center">
