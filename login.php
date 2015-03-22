@@ -51,7 +51,7 @@ if(isset($_POST["submit"])){
 			<div class="box">
 				<div class="box-content">
 					<div class="text-center">
-						<h3 class="page-header">DevOOPS Login Page</h3>
+						<h3 class="page-header">.:: Login Administrator ::.</h3>
 					</div>
 					<form class="form-group" method="POST" action="">
 					<label for="username">Username</label>
