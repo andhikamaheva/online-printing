@@ -1,17 +1,18 @@
 <?php
 include "connection_handler.php";
 
-$user_name=$_POST["user_name"];
-$user_password=$_POST["user_password"];
+$admin_name=$_POST["admin_username"];
+$admin_password=md5($_POST["admin_password"]);
 
-$query="SELECT user_name FROM user 
-				WHERE user_name='".$user_name."' 
-				AND user_password='".$user_password."'";
+$query="SELECT admin_username, admin_name FROM admin 
+				WHERE admin_username='".$admin_name."' 
+				AND admin_pass='".$admin_password."'";
 $login=mysql_query($query);
 $ketemu=mysql_num_rows($login);
 if($ketemu==1){
+	$data=mysql_fetch_array($login);
 	session_start();
-	$_SESSION['user_name']=$user_name;
+	$_SESSION['admin']=$data;
 }
 	header('location: ../');
 ?>
