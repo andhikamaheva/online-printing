@@ -43,7 +43,7 @@
 									<i class="fa fa-angle-down pull-right"></i>
 									<div class="user-mini pull-right">
 										<span class="welcome">Selamat Datang,</span>
-										<span>Jane Devoops</span>
+										<span><?php echo $_SESSION['admin']['admin_name']; ?></span>
 									</div>
 								</a>
 								<ul class="dropdown-menu">
