@@ -2304,7 +2304,7 @@ $(document).ready(function () {
 		window.location.hash='dashboard';
 		page = 'dashboard';
 	}
-	var ajax_url = 'ajax/'+page+'.php';
+	var ajax_url = 'page/'+page+'.php';
 	LoadAjaxContent(ajax_url);
 	$('.main-menu').on('click', 'a', function (e) {
 		var parents = $(this).parents('li');
@@ -2419,7 +2419,7 @@ $(document).ready(function () {
 		if (e.keyCode == 13){
 			e.preventDefault();
 			$('#content').removeClass('full-content');
-			ajax_url = 'ajax/page_search.html';
+			ajax_url = 'page/page_search.html';
 			var filename = ajax_url.match(/.*\/([^/]+)\.([^?]+)/i)[1];
 			window.location.hash = filename;
 			LoadAjaxContent(ajax_url);

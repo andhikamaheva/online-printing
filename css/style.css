@@ -314,10 +314,6 @@ a.show-sidebar:hover {
 .well {
   padding:15px;
 }
-.img-login{
-  width:100px;
-  height:100px;
-}
 .box {
   display: block;
   z-index: 1999;
@@ -329,7 +325,6 @@ a.show-sidebar:hover {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-
 }
 .full-content .box {
   border: 0;
@@ -385,7 +380,6 @@ a.show-sidebar:hover {
   border-radius: 0 0 3px 3px;
   padding: 15px;
   background: #FCFCFC;
-  
 }
 .box-content.dropbox, .box-content.sortablebox {
   overflow: hidden;
@@ -2099,7 +2093,7 @@ td.beauty-hover {
   margin-top: 15px;
 }
 #page-login .box {
-  margin-top:50%;
+  margin-top:15%;
 }
 .one-result {
   margin-top:20px;
