@@ -32,9 +32,12 @@ if(isset($_GET['t'])){
 		
 		if($_GET['a']=='false' || $_GET['a']=='true'){
 			$active=$_GET['a'];
-			$query="UPDATE service_det SET service_det_active=".$active." WHERE md5(service_id)='".$service_id."'";
+			$query="UPDATE service SET service_active=".$active." WHERE service_id='".$service_id."'";
 		}
 	}
+}
+
+
 	$result=mysqli_query($conn,$query);
 	$error=mysqli_error($conn);
 	mysqli_close($conn);

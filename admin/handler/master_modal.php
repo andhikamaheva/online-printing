@@ -102,7 +102,7 @@
 	else if($_GET['p']=='deleteService' and isset($_GET['id'])){
 		$id=$_GET['id'];
 		include "../handler/connection_handler.php";
-		$query="SELECT service_name FROM service_det 
+		$query="SELECT service_name FROM service_det
 						WHERE md5(service_id)='".$id."'";
 		$result=mysqli_query($conn,$query);
 		$data=mysqli_fetch_array($result);
@@ -116,9 +116,8 @@
 		else if($_GET['p']=='deleteServiceDet' and isset($_GET['id'])){
 		$id=$_GET['id'];
 		include "../handler/connection_handler.php";
-		$query="SELECT service_det.service_name FROM service_det left join service on service_det.service_id 
-						= service.service_id
-						WHERE md5(service.service_id)='".$id."'";
+		$query="SELECT service_name FROM service_det
+						WHERE service_id='".$id."'";
 		$result=mysqli_query($conn,$query);
 		$data=mysqli_fetch_array($result);
 		mysqli_close($conn);
