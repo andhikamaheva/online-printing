@@ -242,21 +242,9 @@ function LoadSparkLineScript(callback){
 //  Function for load content from url and put in $('.ajax-content') block
 //
 function LoadAjaxContent(url){
-	$('.preloader').show();
-	$.ajax({
-		mimeType: 'text/html; charset=utf-8', // ! Need set mimeType only when run from local file
-		url: url,
-		type: 'GET',
-		success: function(data) {
-			$('#ajax-content').html(data);
-			$('.preloader').hide();
-		},
-		error: function (jqXHR, textStatus, errorThrown) {
-			alert(errorThrown);
-		},
-		dataType: "html",
-		async: false
-	});
+	var loadingText="<center style=\'margin-top:50px;\'><h3><span class=\'alert alert-info\'><i class=\'fa fa-spinner fa-spin fa-lg\'></i> Memuat Halaman...</span></h3></center>";
+	$('#ajax-content').html(loadingText);
+	$('#ajax-content').load(url);
 }
 //
 //  Function maked all .box selector is draggable, to disable for concrete element add class .no-drop
@@ -2304,7 +2292,7 @@ $(document).ready(function () {
 		window.location.hash='dashboard';
 		page = 'dashboard';
 	}
-	var ajax_url = 'page/'+page+'.php';
+	var ajax_url = 'content/'+page+'.php';
 	LoadAjaxContent(ajax_url);
 	$('.main-menu').on('click', 'a', function (e) {
 		var parents = $(this).parents('li');
@@ -2343,8 +2331,9 @@ $(document).ready(function () {
 				$('#content').removeClass('full-content');
 			}
 			var url = $(this).attr('href');
-			var filename = url.match(/.*\/([^/]+)\.([^?]+)/i)[1];
+			var filename = url.match(/[a-zA-Z\_\.0-9\-]+/i);
 			window.location.hash = filename;
+			url='content/'+filename+'.php';
 			LoadAjaxContent(url);
 		}
 		if ($(this).attr('href') == '#') {
@@ -2390,12 +2379,6 @@ $(document).ready(function () {
 			var content = $(this).closest('div.box');
 			content.remove();
 		});
-	$('#locked-screen').on('click', function (e) {
-		e.preventDefault();
-		$('body').addClass('body-screensaver');
-		$('#screensaver').addClass("show");
-		ScreenSaver();
-	});
 	$('body').on('click', 'a.close-link', function(e){
 		e.preventDefault();
 		CloseModalBox();
@@ -2410,8 +2393,9 @@ $(document).ready(function () {
 				$('#content').removeClass('full-content');
 			}
 			var url = $(this).attr('href');
-			var filename = url.match(/.*\/([^/]+)\.([^?]+)/i)[1];
+			var filename = url.match(/[a-zA-Z\_\.0-9\-]+/i);
 			window.location.hash = filename;
+			url='content/'+filename+'.php';
 			LoadAjaxContent(url);
 		}
 	});
@@ -2419,19 +2403,266 @@ $(document).ready(function () {
 		if (e.keyCode == 13){
 			e.preventDefault();
 			$('#content').removeClass('full-content');
-			ajax_url = 'page/page_search.html';
+			ajax_url = 'content/page_search.html';
 			var filename = ajax_url.match(/.*\/([^/]+)\.([^?]+)/i)[1];
 			window.location.hash = filename;
 			LoadAjaxContent(ajax_url);
 		}
 	});
-	$('#screen_unlock').on('mouseover', function(){
-		var header = 'Enter current username and password';
-		var form = $('<div class="form-group"><label class="control-label">Username</label><input type="text" class="form-control" name="username" /></div>'+
-					'<div class="form-group"><label class="control-label">Password</label><input type="password" class="form-control" name="password" /></div>');
-		var button = $('<div class="text-center"><a href="index.html" class="btn btn-primary">Unlock</a></div>');
-		OpenModalBox(header, form, button);
-	});
+
+//
+// Mengaktifkan dan meng-expand menu sidebar
+//
+	var aktif = window.location.hash;
+	
+	var menu = $( "a[href='"+aktif+"']" );
+	var panelMenu = menu.closest('ul.dropdown-menu');
+	
+	var menuUp1 = menu.closest('li.dropdown').find('a.dropdown-toggle');
+	var panelMenuUp1 = menuUp1.closest('ul.dropdown-menu');
+	
+	var menuUp2 = panelMenuUp1.closest('li.dropdown').find('a.dropdown-toggle');
+	var panelMenuUp2 = menuUp2.closest('ul.dropdown-menu');
+	
+	panelMenu.css("display","block");
+	panelMenuUp1.css("display","block");
+	menuUp1.addClass('active-parent');
+	menuUp2.addClass('active-parent');
+	menu.addClass('active-parent');
+	menu.addClass('active');
 });
+
+//
+// Example form validator function
+//
+function validationAdminAdd(){
+	$('#insertAdminForm').bootstrapValidator({
+		message: 'This value is not valid',
+		fields: {
+			username: {
+				message: 'Username tidak valid',
+				validators: {
+					notEmpty: {
+						message: 'Username tidak boleh kosong'
+					},
+					stringLength: {
+						min: 6,
+						max: 30,
+						message: 'Panjang username harus lebih dari 6 dan kurang dari 30 karakter'
+					},
+					regexp: {
+						regexp: /^[a-zA-Z0-9_\.]+$/,
+						message: 'Username hanya dapat menggunakan huruf, angka, titik dan garis bawah'
+					}
+				}
+			},
+			namaD: {
+				validators: {
+					notEmpty: {
+						message: 'Nama depan tidak boleh kosong'
+					},
+					regexp: {
+						regexp: /^[a-zA-Z\.\,\ ]+$/,
+						message: 'Nama hanya dapat menggunakan huruf, titik dan koma'
+					}
+				}
+			},
+			email: {
+				validators: {
+					notEmpty: {
+						message: 'Alamat email tidak boleh kosong'
+					},
+					emailAddress: {
+						message: 'Bukan alamat email yang valid'
+					}
+				}
+			}
+		}
+	});
+}
+function validationAdminEdit(){
+	$('#editAdminForm').bootstrapValidator({
+		message: 'This value is not valid',
+		fields: {
+			namaD: {
+				validators: {
+					notEmpty: {
+						message: 'Nama depan tidak boleh kosong'
+					},
+					regexp: {
+						regexp: /^[a-zA-Z\.\,\ ]+$/,
+						message: 'Nama hanya dapat menggunakan huruf, titik dan koma'
+					}
+				}
+			},
+			email: {
+				validators: {
+					notEmpty: {
+						message: 'Alamat email tidak boleh kosong'
+					},
+					emailAddress: {
+						message: 'Bukan alamat email yang valid'
+					}
+				}
+			},
+			password: {
+				validators: {
+					stringLength: {
+						min: 6,
+						message: 'Panjang username harus lebih dari 6 karakter'
+					},
+				}
+			},
+			re_password: {
+				validators: {
+					identical: {
+						field: 'password',
+						message: 'Password tidak sama'
+					}
+				}
+			}
+		}
+	});
+}
+
+function validationServiceAdd(){
+	$('#insertAdminForm').bootstrapValidator({
+		message: 'This value is not valid',
+		fields: {
+			username: {
+				message: 'Username tidak valid',
+				validators: {
+					notEmpty: {
+						message: 'Username tidak boleh kosong'
+					},
+					stringLength: {
+						min: 6,
+						max: 30,
+						message: 'Panjang username harus lebih dari 6 dan kurang dari 30 karakter'
+					},
+					regexp: {
+						regexp: /^[a-zA-Z0-9_\.]+$/,
+						message: 'Username hanya dapat menggunakan huruf, angka, titik dan garis bawah'
+					}
+				}
+			},
+			namaD: {
+				validators: {
+					notEmpty: {
+						message: 'Nama depan tidak boleh kosong'
+					},
+					regexp: {
+						regexp: /^[a-zA-Z\.\,\ ]+$/,
+						message: 'Nama hanya dapat menggunakan huruf, titik dan koma'
+					}
+				}
+			},
+			email: {
+				validators: {
+					notEmpty: {
+						message: 'Alamat email tidak boleh kosong'
+					},
+					emailAddress: {
+						message: 'Bukan alamat email yang valid'
+					}
+				}
+			}
+		}
+	});
+}
+
+function validationServiceEdit(){
+	$('#editAdminForm').bootstrapValidator({
+		message: 'This value is not valid',
+		fields: {
+			namaD: {
+				validators: {
+					notEmpty: {
+						message: 'Nama depan tidak boleh kosong'
+					},
+					regexp: {
+						regexp: /^[a-zA-Z\.\,\ ]+$/,
+						message: 'Nama hanya dapat menggunakan huruf, titik dan koma'
+					}
+				}
+			},
+			email: {
+				validators: {
+					notEmpty: {
+						message: 'Alamat email tidak boleh kosong'
+					},
+					emailAddress: {
+						message: 'Bukan alamat email yang valid'
+					}
+				}
+			},
+			password: {
+				validators: {
+					stringLength: {
+						min: 6,
+						message: 'Panjang username harus lebih dari 6 karakter'
+					},
+				}
+			},
+			re_password: {
+				validators: {
+					identical: {
+						field: 'password',
+						message: 'Password tidak sama'
+					}
+				}
+			}
+		}
+	});
+}
+
+//
+// Function for table, located in element with id = datatable-custom
+//
+function TableCustom(){
+	var asInitVals = [];
+	var oTable = $('#datatable-custom').dataTable( {
+		"aaSorting": [[ 0, "asc" ]],
+		"sDom": "T<'box-content'<'col-sm-6'f><'col-sm-6 text-right'l><'clearfix'>>rt<'box-content'<'col-sm-6'i><'col-sm-6 text-right'p><'clearfix'>>",
+		"sPaginationType": "bootstrap",
+		"oLanguage": {
+			"sSearch": "",
+			"sLengthMenu": '_MENU_'
+		},
+		"oTableTools": {
+			"sSwfPath": "plugins/datatables/copy_csv_xls_pdf.swf",
+			"aButtons": [
+				"copy",
+				"print",
+				{
+					"sExtends":    "collection",
+					"sButtonText": 'Save <span class="caret" />',
+					"aButtons":    [ "csv", "xls", "pdf" ]
+				}
+			]
+		},
+		bAutoWidth: false
+	});
+	var header_inputs = $("#datatable-custom thead input");
+	header_inputs.on('keyup', function(){
+		/* Filter on the column (the index) of this element */
+		oTable.fnFilter( this.value, header_inputs.index(this) + 1 );
+	})
+	.on('focus', function(){
+		if ( this.className == "search_init" ){
+			this.className = "";
+			this.value = "";
+		}
+	})
+	.on('blur', function (i) {
+		if ( this.value == "" ){
+			this.className = "search_init";
+			this.value = asInitVals[header_inputs.index(this)];
+		}
+	});
+	header_inputs.each( function (i) {
+		asInitVals[i] = this.value;
+	});
+}
 
 

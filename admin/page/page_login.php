@@ -25,21 +25,32 @@
 				<h1><center>Online Printing <img src="img/logo-200.png" width="100" height="100" />
 				</center></h1>
 			</div>
+			<?php
+			if(isset($_GET['f'])){
+			?>
+				<div class="alert alert-danger" style="margin-top:20px;">Login Failed!</div>
+			<form class="box" action="handler/login_handler.php" method="post">
+			<?php
+			}else{
+			?>
 			<form class="box" style="margin-top:10%;" action="handler/login_handler.php" method="post">
+			<?php
+			}
+			?>
 				<div class="box-content" style="border-top-left-radius:20%;border-bottom-right-radius:20%;">
 					<div class="text-center">
 						<h3 class="page-header">Login Admin</h3>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Username</label>
-						<input type="text" class="form-control" name="admin_username" />
+						<input type="text" class="form-control" name="admin_username" reqiured autofocus />
 					</div>
 					<div class="form-group">
 						<label class="control-label">Password</label>
-						<input type="password" class="form-control" name="admin_password" />
+						<input type="password" class="form-control" name="admin_password" required/>
 					</div>
 					<div class="text-center">
-						<button type="submit" class="btn btn-primary">Sign in</button>
+						<button type="submit" name="submit" class="btn btn-primary">Sign in</button>
 					</div>
 				</div>
 			</form>
