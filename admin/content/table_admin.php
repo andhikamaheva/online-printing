@@ -2,9 +2,9 @@
 	<thead>
 		<tr>
 			<th><label>No</label></th>
-			<th><label>Username</label></th>
-			<th><label>Nama</label></th>
-			<th><label>Email</label></th>
+			<th><label><span class="sr-only">Username</span><input type="text" name="search_votes" value="Cari Username" class="search_init" /></label></th>
+			<th><label><span class="sr-only">Nama</span><input type="text" name="search_votes" value="Cari Nama" class="search_init" /></label></th>
+			<th><label><span class="sr-only">Email</span><input type="text" name="search_votes" value="Cari Email" class="search_init" /></label></th>
 			<th><label>Aksi</label></th>
 		</tr>
 	</thead>
