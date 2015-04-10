@@ -177,7 +177,18 @@ function serviceEdit(id){
 	$('#serviceModal').modal('toggle');
 }
 
-function serviceEditSave(id){
+function serviceDetEdit(id){
+	$('#serviceModalLabel').html('Ubah Rincian Layanan Dasar');
+	$('#serviceModalContent').html(loadingText);
+	$('#serviceModalContent').load('handler/master_modal.php?p=editServiceDet&id='+id);
+	$('#serviceModalConfirm').html('Simpan');
+	$('#serviceModalConfirm').attr('class','btn btn-primary');
+	$('#serviceModalConfirm').attr('onclick','serviceEditSave(\''+id+'\')');
+	$('#serviceModal').modal('toggle');
+}
+
+
+function serviceDetEditSave(id){
 	namaD=$('#editServiceForm').find( "input[name='namaD']" ).val();
 	error=$('#editServiceForm').find('.has-error').length;
 	
@@ -278,7 +289,7 @@ function serviceDetAdd(){
 	lebar=$('#insertServiceForm').find( "input[name='lebar']" ).val();
 	harga=$('#insertServiceForm').find( "input[name='harga']" ).val();
 	error=$('#insertServiceForm').find('.has-error').length;
-	
+
 	if(harga!="" && error==0){
 		$('#insertServiceForm').html(processText);
 		$.ajax({    //create an ajax request to load_page.php
@@ -344,7 +355,7 @@ function serviceDetDeleteConf(id,act){
 			}else{
 				$('#serviceModal').modal('toggle');
 				$('#dataService').html(tableText);
-				$('#dataService').load('content/table_service.php');
+				$('#dataService').load('content/table_service_detail.php');
 			}
 		}
 	});

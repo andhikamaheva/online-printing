@@ -22,21 +22,21 @@ if(isset($_GET['t'])){
 	
 	if($_GET['t']=='service'){
 		$service_id=$_POST["service_id"];
-		
+
 		if($_GET['a']=='false' || $_GET['a']=='true'){
 			$active=$_GET['a'];
 			$query="UPDATE service_det SET service_det_active=".$active." WHERE md5(service_id)='".$service_id."'";
 		}
-		if($_GET['t']=='serviceDet'){
-		$service_id=$_POST["service_id"];
 		
+}
+	if($_GET['t']=='serviceDet'){
+		$service_id=$_POST["service_id"];
+
 		if($_GET['a']=='false' || $_GET['a']=='true'){
 			$active=$_GET['a'];
 			$query="UPDATE service SET service_active=".$active." WHERE service_id='".$service_id."'";
 		}
 	}
-}
-
 
 	$result=mysqli_query($conn,$query);
 	$error=mysqli_error($conn);

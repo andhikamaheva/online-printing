@@ -99,6 +99,55 @@
 		</script>
 <?php
 	}
+	else if($_GET['p']=='editServiceDet' and isset($_GET['id'])){
+?>
+		<form class="form-horizontal" id="editServiceForm">
+			<fieldset>
+				<div class="form-group">
+				<label class="col-sm-4 control-label">Layanan</label>
+					<div class="col-sm-8 col-md-6">
+					<select class="populate placeholder form-control" name="layanan" >
+			<?php
+		include "../handler/connection_handler.php";
+		$query="SELECT service_id as service_id, service_name
+				FROM service_det WHERE service_det_active = 1";
+		$result=mysqli_query($conn,$query);
+		while($data=mysqli_fetch_array($result)){
+
+		?>
+
+		<option value= <?php echo $data['service_id'] ?> ><?php echo $data['service_name']; ?></option>
+		<?php } 
+			mysqli_close($conn);
+		?>
+			</select>
+					</div>
+				<label class="col-sm-4 control-label">Ukuran</label>
+					<div class="col-sm-8 col-md-6">
+						<?php
+							$id=$_GET['id'];
+							include "../handler/connection_handler.php";
+							$query="SELECT service_det.service_name as service_name, service.service_size as service_size, service.service_price as service_price FROM service_det left join service
+							on service_det.service_ID = service.service_ID
+							WHERE service_det.service_ID= 1";
+							$result=mysqli_query($conn,$query);
+							$data=mysqli_fetch_array($result);
+							mysqli_close($conn);
+						?>
+						<input type="text" class="form-control" name="size" placeholder="<?php echo $data['service_size']; ?>" data-toggle="tooltip" data-placement="bottom" title="Ukuran" value=""/>
+					</div>
+					<label class="col-sm-4 control-label">Harga</label>
+					<div class="col-sm-8 col-md-6">
+					<input type="text" class="form-control" name="price" placeholder="<?php echo $data['service_price']; ?>" data-toggle="tooltip" data-placement="bottom" title="Harga" value=""/>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+		<script type="text/javascript">
+			LoadBootstrapValidatorScript(validationServiceEdit);
+		</script>
+<?php
+	}
 	else if($_GET['p']=='deleteService' and isset($_GET['id'])){
 		$id=$_GET['id'];
 		include "../handler/connection_handler.php";

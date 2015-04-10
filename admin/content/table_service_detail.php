@@ -25,7 +25,7 @@
 			<td><center>
 				<div class="row">
 					<div class="col-md-6">
-						<button class="btn btn-primary" onclick="serviceEdit('<?php echo $data['service_id']; ?>');">
+						<button class="btn btn-primary" onclick="serviceDetEdit('<?php echo $data['service_id']; ?>');">
 							<i class="fa fa-pencil"></i> Ubah
 						</button>
 					</div>
