@@ -11,7 +11,7 @@
 	<tbody>
 	<?php
 		include "../handler/connection_handler.php";
-		$query="SELECT service_det.service_name as service_name, service.service_id as service_id, service.service_active as service_active, service.service_price as service_price, service.service_size as service_size
+		$query="SELECT service_det.service_name as service_name, service.service_id as service_id, service.service_active as service_active, service.service_price as service_price, service.service_size as service_size, md5(service.service_size) as size
 				FROM service left join service_det on service.service_id = service_det.service_id ";
 		$result=mysqli_query($conn,$query);
 		while($data=mysqli_fetch_array($result)){
@@ -25,7 +25,7 @@
 			<td><center>
 				<div class="row">
 					<div class="col-md-6">
-						<button class="btn btn-primary" onclick="serviceDetEdit('<?php echo $data['service_id']; ?>');">
+						<button class="btn btn-primary" onclick="serviceDetEdit('<?php echo $data['service_id']; ?>','<?php echo $data['size']; ?>');">
 							<i class="fa fa-pencil"></i> Ubah
 						</button>
 					</div>

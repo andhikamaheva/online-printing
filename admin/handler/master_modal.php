@@ -110,6 +110,7 @@
 			<?php
 		include "../handler/connection_handler.php";
 		$id=$_GET['id'];
+		$size=$_GET['size'];
 		$query="SELECT service_id as service_id, service_name
 				FROM service_det WHERE service_det_active = 1 order by service_id = '".$id."' desc";
 		$result=mysqli_query($conn,$query);
@@ -130,16 +131,16 @@
 							include "../handler/connection_handler.php";
 							$query="SELECT service_det.service_name as service_name, service.service_size as service_size, service.service_price as service_price FROM service_det left join service
 							on service_det.service_ID = service.service_ID
-							WHERE service_det.service_ID= '".$id."'";
+							WHERE service_det.service_ID= '".$id."' and md5(service.service_size)= '".$size."'";
 							$result=mysqli_query($conn,$query);
 							$data=mysqli_fetch_array($result);
 							mysqli_close($conn);
 						?>
-						<input type="text" class="form-control" name="size" placeholder="<?php echo $data['service_size']; ?>" data-toggle="tooltip" data-placement="bottom" title="Ukuran" value=""/>
+					<input type="text" class="form-control" name="size"  data-toggle="tooltip" data-placement="bottom" title="Ukuran" value="<?php echo $data['service_size']; ?>"/>
 					</div>
 					<label class="col-sm-4 control-label">Harga</label>
 					<div class="col-sm-8 col-md-6">
-					<input type="text" class="form-control" name="price" placeholder="<?php echo $data['service_price']; ?>" data-toggle="tooltip" data-placement="bottom" title="Harga" value=""/>
+					<input type="text" class="form-control" name="price"  data-toggle="tooltip" data-placement="bottom" title="Harga" value="<?php echo $data['service_price']; ?>"/>
 					</div>
 				</div>
 			</fieldset>

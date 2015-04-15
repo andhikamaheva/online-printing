@@ -177,21 +177,20 @@ function serviceEdit(id){
 	$('#serviceModal').modal('toggle');
 }
 
-function serviceDetEdit(id){
+function serviceDetEdit(id,size){
 	$('#serviceModalLabel').html('Ubah Rincian Layanan Dasar');
 	$('#serviceModalContent').html(loadingText);
-	$('#serviceModalContent').load('handler/master_modal.php?p=editServiceDet&id='+id);
+	$('#serviceModalContent').load('handler/master_modal.php?p=editServiceDet&id='+id+'&size='+size);
 	$('#serviceModalConfirm').html('Simpan');
 	$('#serviceModalConfirm').attr('class','btn btn-primary');
-	$('#serviceModalConfirm').attr('onclick','serviceEditSave(\''+id+'\')');
+	$('#serviceModalConfirm').attr('onclick','serviceDetEditSave(\''+id+'\',\''+size+'\')');
 	$('#serviceModal').modal('toggle');
 }
 
 
-function serviceDetEditSave(id){
+function serviceEditSave(id){
 	namaD=$('#editServiceForm').find( "input[name='namaD']" ).val();
 	error=$('#editServiceForm').find('.has-error').length;
-	
 	if(namaD!="" && error==0){
 		$('#serviceModalContent').html(processText);
 		$.ajax({    //create an ajax request to load_page.php
@@ -207,6 +206,36 @@ function serviceDetEditSave(id){
 					$('#serviceModal').modal('toggle');
 					$('#dataService').html(tableText);
 					$('#dataService').load('content/table_service.php');
+				}
+			}
+		});
+	}
+}
+
+function serviceDetEditSave(id,size){
+	layanan=$('#editServiceForm').find("select[name='layanan']" ).val();
+	ukuran=$('#editServiceForm').find( "input[name='size']" ).val();
+	harga=$('#editServiceForm').find( "input[name='price']" ).val();
+	error=$('#editServiceForm').find('.has-error').length;
+
+	if(layanan!="" && error==0 && harga!="" && harga!=""){
+		$('#serviceModalContent').html(processText);
+		$.ajax({    //create an ajax request to load_page.php
+			type: "POST",
+			url: "handler/update_handler.php?t=serviceDet",
+			dataType: "html",
+			data: { 'id_lama': id,
+					'size_lama': size,
+					'service_id': layanan,
+					'service_size' : ukuran,
+					'service_price' : harga},   //expect html to be returned
+			success: function(response){
+				if(response!=""){
+					alert(response);
+				}else{
+					$('#serviceModal').modal('toggle');
+					$('#dataService').html(tableText);
+					$('#dataService').load('content/table_service_detail.php');
 				}
 			}
 		});
