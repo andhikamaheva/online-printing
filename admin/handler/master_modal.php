@@ -109,8 +109,9 @@
 					<select class="populate placeholder form-control" name="layanan" >
 			<?php
 		include "../handler/connection_handler.php";
+		$id=$_GET['id'];
 		$query="SELECT service_id as service_id, service_name
-				FROM service_det WHERE service_det_active = 1";
+				FROM service_det WHERE service_det_active = 1 order by service_id = '".$id."' desc";
 		$result=mysqli_query($conn,$query);
 		while($data=mysqli_fetch_array($result)){
 
@@ -129,7 +130,7 @@
 							include "../handler/connection_handler.php";
 							$query="SELECT service_det.service_name as service_name, service.service_size as service_size, service.service_price as service_price FROM service_det left join service
 							on service_det.service_ID = service.service_ID
-							WHERE service_det.service_ID= 1";
+							WHERE service_det.service_ID= '".$id."'";
 							$result=mysqli_query($conn,$query);
 							$data=mysqli_fetch_array($result);
 							mysqli_close($conn);
