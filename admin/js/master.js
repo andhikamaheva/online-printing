@@ -352,7 +352,7 @@ function serviceDetReset(){
 }
 
 
-function serviceDetDelete(id,act){
+function serviceDetDelete(id,act,size){
 	if(act==true){
 		$('#serviceModalLabel').html('Buka Layanan Dasar');
 	}else{
@@ -367,17 +367,20 @@ function serviceDetDelete(id,act){
 		$('#serviceModalConfirm').attr('class','btn btn-danger');
 		$('#serviceModalConfirm').html('Kunci');
 	}
-	$('#serviceModalConfirm').attr('onclick','serviceDetDeleteConf(\''+id+'\', '+act+')');
+	//$('#serviceModalConfirm').attr('onclick','serviceDetDeleteConf(\''+id+'\', '+act+')');
+	$('#serviceModalConfirm').attr('onclick','serviceDetDeleteConf(\''+id+'\', '+act+',\''+size+'\')');
 	$('#serviceModal').modal('toggle');
 }
 
-function serviceDetDeleteConf(id,act){
+function serviceDetDeleteConf(id,act,size){
 	$('#serviceModalContent').html(processText);
 	$.ajax({    //create an ajax request to load_page.php
 		type: "POST",
 		url: "handler/delete_handler.php?t=serviceDet&a="+act,
 		dataType: "html",
-		data: { 'service_id': id },   //expect html to be returned
+		data: { 'service_id': id,
+				'service_size' : size
+				 },   //expect html to be returned
 		success: function(response){
 			if(response!=""){
 				alert(response);

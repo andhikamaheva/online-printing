@@ -4,16 +4,16 @@ include "connection_handler.php";
 if(isset($_GET['t'])){
 	if($_GET['t']=='admin'){
 		$admin_username=$_POST["admin_username"];
-		
+
 		if($_GET['a']=='false' || $_GET['a']=='true'){
 			$active=$_GET['a'];
 			$query="UPDATE admin SET admin_active=".$active." WHERE md5(admin_username)='".$admin_username."'";
 		}
 	}
-	
+
 	if($_GET['t']=='member'){
 		$member_username=$_POST["member_username"];
-		
+
 		if($_GET['a']=='false' || $_GET['a']=='true'){
 			$active=$_GET['a'];
 			$query="UPDATE member SET member_ and service_size = active=".$active." WHERE md5(member_username)='".$member_username."'";
@@ -34,7 +34,7 @@ if(isset($_GET['t'])){
 		$service_size = $_POST["service_size"];
 		if($_GET['a']=='false' || $_GET['a']=='true'){
 			$active=$_GET['a'];
-			$query="UPDATE service SET service_active=".$active." WHERE service_id='".$service_id."' and service_size = ";
+			$query="UPDATE service SET service_active=".$active." WHERE service_id='".$service_id."' and service_size = '".$service_size."'";
 		}
 	}
 

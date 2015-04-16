@@ -33,7 +33,7 @@
 						if($data['service_active']==true){
 					?>
 					<div class="col-md-6">
-						<button class="btn btn-danger" onclick="serviceDetDelete('<?php echo $data['service_id']; ?>',false);">
+						<button class="btn btn-danger" onclick="serviceDetDelete('<?php echo $data['service_id']; ?>',false, '<?php echo $data['service_size'] ?>');">
 							<i class="fa fa-lock"></i> Non Aktif
 						</button>
 					</div>
@@ -41,7 +41,7 @@
 						}else{
 					?>
 					<div class="col-md-6">
-						<button class="btn btn-success" onclick="serviceDetDelete('<?php echo $data['service_id']; ?>',true);">
+						<button class="btn btn-success" onclick="serviceDetDelete('<?php echo $data['service_id']; ?>',true, '<?php echo $data['service_size'] ?>');">
 							<i class="fa fa-unlock-alt"></i> Aktif
 						</button>
 					</div>
