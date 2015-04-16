@@ -1,6 +1,7 @@
 var loadingText="<center><span class=\'alert alert-info\'><i class=\'fa fa-spinner fa-spin fa-lg\'></i> Mengambil Data...</span></center>";
 var processText="<center><span class=\'alert alert-info\'><i class=\'fa fa-spinner fa-spin fa-lg\'></i> Sedang Memproses...</span></center>";
 var tableText="<center><div class=\'alert alert-info\'><i class=\'fa fa-spinner fa-spin fa-lg\'></i> Menyegarkan Data...</div></center>";
+
 function adminEdit(id){
 	$('#adminModalLabel').html('Ubah Admin');
 	$('#adminModalContent').html(loadingText);
@@ -17,7 +18,7 @@ function adminEditSave(id){
 	password=$('#editAdminForm').find( "input[name='password']" ).val();
 	re_password=$('#editAdminForm').find( "input[name='re_password']" ).val();
 	error=$('#editAdminForm').find('.has-error').length;
-	
+
 	if(namaD!="" && email!="" && error==0){
 		if((password!="" && re_password!="") || (password=="" && re_password=="")){
 			$('#adminModalContent').html(processText);
@@ -320,7 +321,6 @@ function serviceDetAdd(){
 	error=$('#insertServiceForm').find('.has-error').length;
 
 	if(harga!="" && error==0){
-		$('#insertServiceForm').html(processText);
 		$.ajax({    //create an ajax request to load_page.php
 			type: "POST",
 			url: "handler/insert_handler.php?t=servicedet",
