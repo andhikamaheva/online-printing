@@ -33,12 +33,11 @@ function adminEditSave(id){
 				success: function(response){
 					if(response!=""){
 						alert(response);
-					}else{
-						$('#adminModal').modal('toggle');
-						$('#dataAdmin').html(tableText);
-						$('#admin_name').html(namaD);
-						$('#dataAdmin').load('content/table_admin.php');
 					}
+					$('#adminModal').modal('toggle');
+					$('#dataAdmin').html(tableText);
+					$('#admin_name').html(namaD);
+					$('#dataAdmin').load('content/table_admin.php');
 				}
 			});
 		}
@@ -74,11 +73,10 @@ function adminDeleteConf(id,act){
 		success: function(response){
 			if(response!=""){
 				alert(response);
-			}else{
-				$('#adminModal').modal('toggle');
-				$('#dataAdmin').html(tableText);
-				$('#dataAdmin').load('content/table_admin.php');
 			}
+			$('#adminModal').modal('toggle');
+			$('#dataAdmin').html(tableText);
+			$('#dataAdmin').load('content/table_admin.php');
 		}
 	});
 }
@@ -121,10 +119,9 @@ function adminAdd(){
 				$('#insertAdminForm').load('content/form_admin.php');
 				if(response!=""){
 					alert(response);
-				}else{
-					$('#dataAdmin').html(tableText);
-					$('#dataAdmin').load('content/table_admin.php');
 				}
+				$('#dataAdmin').html(tableText);
+				$('#dataAdmin').load('content/table_admin.php');
 			}
 		});
 	}
@@ -159,11 +156,10 @@ function memberDeleteConf(id,act){
 		success: function(response){
 			if(response!=""){
 				alert(response);
-			}else{
-				$('#memberModal').modal('toggle');
-				$('#dataMember').html(tableText);
-				$('#dataMember').load('content/table_member.php');
 			}
+			$('#memberModal').modal('toggle');
+			$('#dataMember').html(tableText);
+			$('#dataMember').load('content/table_member.php');
 		}
 	});
 }
@@ -203,23 +199,23 @@ function serviceEditSave(id){
 			success: function(response){
 				if(response!=""){
 					alert(response);
-				}else{
-					$('#serviceModal').modal('toggle');
-					$('#dataService').html(tableText);
-					$('#dataService').load('content/table_service.php');
 				}
+				$('#serviceModal').modal('toggle');
+				$('#dataService').html(tableText);
+				$('#dataService').load('content/table_service.php');
 			}
 		});
 	}
 }
 
 function serviceDetEditSave(id,size){
-	layanan=$('#editServiceForm').find("select[name='layanan']" ).val();
-	ukuran=$('#editServiceForm').find( "input[name='size']" ).val();
-	harga=$('#editServiceForm').find( "input[name='price']" ).val();
-	error=$('#editServiceForm').find('.has-error').length;
+	layanan=$('#editServiceDetForm').find("select[name='layanan']" ).val();
+	panjang=$('#editServiceDetForm').find( "input[name='panjang']" ).val();
+	lebar=$('#editServiceDetForm').find( "input[name='lebar']" ).val();
+	harga=$('#editServiceDetForm').find( "input[name='price']" ).val();
+	error=$('#editServiceDetForm').find('.has-error').length;
 
-	if(layanan!="" && error==0 && harga!="" && harga!=""){
+	if(layanan!="" && error==0 && panjang!="" && lebar!="" && harga!=""){
 		$('#serviceModalContent').html(processText);
 		$.ajax({    //create an ajax request to load_page.php
 			type: "POST",
@@ -228,16 +224,15 @@ function serviceDetEditSave(id,size){
 			data: { 'id_lama': id,
 					'size_lama': size,
 					'service_id': layanan,
-					'service_size' : ukuran,
+					'service_size' : panjang+' x '+lebar,
 					'service_price' : harga},   //expect html to be returned
 			success: function(response){
 				if(response!=""){
 					alert(response);
-				}else{
-					$('#serviceModal').modal('toggle');
-					$('#dataService').html(tableText);
-					$('#dataService').load('content/table_service_detail.php');
 				}
+				$('#serviceModal').modal('toggle');
+				$('#dataService').html(tableText);
+				$('#dataService').load('content/table_service_detail.php');
 			}
 		});
 	}
@@ -272,11 +267,10 @@ function serviceDeleteConf(id,act){
 		success: function(response){
 			if(response!=""){
 				alert(response);
-			}else{
-				$('#serviceModal').modal('toggle');
-				$('#dataService').html(tableText);
-				$('#dataService').load('content/table_service.php');
 			}
+			$('#serviceModal').modal('toggle');
+			$('#dataService').html(tableText);
+			$('#dataService').load('content/table_service.php');
 		}
 	});
 }
@@ -296,10 +290,9 @@ function serviceAdd(){
 				$('#insertServiceForm').load('content/form_service.php');
 				if(response!=""){
 					alert(response);
-				}else{
-					$('#dataService').html(tableText);
-					$('#dataService').load('content/table_service.php');
 				}
+				$('#dataService').html(tableText);
+				$('#dataService').load('content/table_service.php');
 			}
 		});
 	}
@@ -314,13 +307,14 @@ function serviceReset(){
 
 
 function serviceDetAdd(){
-	layanan=$('#insertServiceForm').find( "select[name='layanan']" ).val();
-	panjang=$('#insertServiceForm').find( "input[name='panjang']" ).val();
-	lebar=$('#insertServiceForm').find( "input[name='lebar']" ).val();
-	harga=$('#insertServiceForm').find( "input[name='harga']" ).val();
-	error=$('#insertServiceForm').find('.has-error').length;
+	layanan=$('#insertServiceDetForm').find( "select[name='layanan']" ).val();
+	panjang=$('#insertServiceDetForm').find( "input[name='panjang']" ).val();
+	lebar=$('#insertServiceDetForm').find( "input[name='lebar']" ).val();
+	harga=$('#insertServiceDetForm').find( "input[name='harga']" ).val();
+	error=$('#insertServiceDetForm').find('.has-error').length;
 
-	if(harga!="" && error==0){
+	if(panjang!="" && lebar!="" && harga!="" && error==0){
+		$('#insertServiceDetForm').html(processText);
 		$.ajax({    //create an ajax request to load_page.php
 			type: "POST",
 			url: "handler/insert_handler.php?t=servicedet",
@@ -330,13 +324,12 @@ function serviceDetAdd(){
 					'service_price' : harga,
 					'service_layanan' : layanan },   //expect html to be returned
 			success: function(response){
-				$('#insertServiceForm').load('content/form_service_detail.php');
+				$('#insertServiceDetForm').load('content/form_service_detail.php');
 				if(response!=""){
 					alert(response);
-				}else{
-					$('#dataService').html(tableText);
-					$('#dataService').load('content/table_service_detail.php');
 				}
+				$('#dataService').html(tableText);
+				$('#dataService').load('content/table_service_detail.php');
 			}
 		});
 	}
@@ -344,6 +337,8 @@ function serviceDetAdd(){
 
 function serviceDetReset(){
 	$('#grpNama').attr('class','form-group');
+	$('#grpUkuran').attr('class','form-group');
+	$('#grpHarga').attr('class','form-group');
 	$('.help-block').remove();
 
 	$( "input[name='panjang']" ).val(null);
@@ -352,31 +347,22 @@ function serviceDetReset(){
 }
 
 
-function serviceDetDelete(id,act,size){
-	if(act==true){
-		$('#serviceModalLabel').html('Buka Layanan Dasar');
-	}else{
-		$('#serviceModalLabel').html('Kunci Layanan Dasar');
-	}
+function serviceDetDelete(id,size){
+	$('#serviceModalLabel').html('Hapus Layanan Rinci');
 	$('#serviceModalContent').html(loadingText);
-	$('#serviceModalContent').load('handler/master_modal.php?p=deleteServiceDet&id='+id);
-	if(act==true){
-		$('#serviceModalConfirm').attr('class','btn btn-success');
-		$('#serviceModalConfirm').html('Buka');
-	}else{
-		$('#serviceModalConfirm').attr('class','btn btn-danger');
-		$('#serviceModalConfirm').html('Kunci');
-	}
+	$('#serviceModalContent').load('handler/master_modal.php?p=deleteServiceDet&id='+id+'&size='+size);
+	$('#serviceModalConfirm').attr('class','btn btn-danger');
+	$('#serviceModalConfirm').html('Hapus');
 	//$('#serviceModalConfirm').attr('onclick','serviceDetDeleteConf(\''+id+'\', '+act+')');
-	$('#serviceModalConfirm').attr('onclick','serviceDetDeleteConf(\''+id+'\', '+act+',\''+size+'\')');
+	$('#serviceModalConfirm').attr('onclick','serviceDetDeleteConf(\''+id+'\',\''+size+'\')');
 	$('#serviceModal').modal('toggle');
 }
 
-function serviceDetDeleteConf(id,act,size){
+function serviceDetDeleteConf(id,size){
 	$('#serviceModalContent').html(processText);
 	$.ajax({    //create an ajax request to load_page.php
 		type: "POST",
-		url: "handler/delete_handler.php?t=serviceDet&a="+act,
+		url: "handler/delete_handler.php?t=serviceDet",
 		dataType: "html",
 		data: { 'service_id': id,
 				'service_size' : size
@@ -384,11 +370,10 @@ function serviceDetDeleteConf(id,act,size){
 		success: function(response){
 			if(response!=""){
 				alert(response);
-			}else{
-				$('#serviceModal').modal('toggle');
-				$('#dataService').html(tableText);
-				$('#dataService').load('content/table_service_detail.php');
 			}
+			$('#serviceModal').modal('toggle');
+			$('#dataService').html(tableText);
+			$('#dataService').load('content/table_service_detail.php');
 		}
 	});
 }

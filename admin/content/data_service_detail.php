@@ -20,7 +20,7 @@
 				<div class="no-move"></div>
 			</div>
 			<div class="box-content">
-				<form id="insertServiceForm" method="post" action="handler/insert_handler.php?t=service" class="form-horizontal">
+				<form id="insertServiceDetForm" method="post" action="handler/insert_handler.php?t=service" class="form-horizontal">
 				<?php
 					include "form_service_detail.php";
 				?>
@@ -70,7 +70,6 @@
 		LoadSelect2Script(MakeSelect2);
 	}
 	function MakeSelect2(){
-		$('select').select2();
 		$('.dataTables_filter').each(function(){
 			$(this).find('label input[type=text]').attr('placeholder', 'Search');
 		});
@@ -80,7 +79,7 @@ $(document).ready(function() {
 	// Load Datatables and run plugin on tables 
 	LoadDataTablesScripts(AllTables);
 	// Load example of form validation
-	LoadBootstrapValidatorScript(validationServiceAdd);
+	LoadBootstrapValidatorScript(validationServiceDetAdd);
 	// Add tooltip to form-controls
 	$('.form-control').tooltip();
 });

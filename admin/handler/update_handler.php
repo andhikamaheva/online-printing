@@ -33,7 +33,7 @@ if(isset($_GET['t'])){
 		$service_id=$_POST["service_id"];
 		$service_price=$_POST["service_price"];
 		$service_size=$_POST["service_size"];
-		$query="UPDATE service SET service_ID='".$service_id."', service_price= '".$service_price."', service_size = '".$service_size."' where service_id = '".$id."' and md5(service_size) = '".$size."'";
+		$query="UPDATE service SET service_ID='".$service_id."', service_price= '".$service_price."', service_size = '".$service_size."' where md5(service_id) = '".$id."' and md5(service_size) = '".$size."'";
 	}
 	$result=mysqli_query($conn,$query);
 	$error=mysqli_error($conn);

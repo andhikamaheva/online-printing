@@ -32,10 +32,7 @@ if(isset($_GET['t'])){
 	if($_GET['t']=='serviceDet'){
 		$service_id=$_POST["service_id"];
 		$service_size = $_POST["service_size"];
-		if($_GET['a']=='false' || $_GET['a']=='true'){
-			$active=$_GET['a'];
-			$query="UPDATE service SET service_active=".$active." WHERE service_id='".$service_id."' and service_size = '".$service_size."'";
-		}
+		$query="DELETE FROM service WHERE md5(service_id)='".$service_id."' and md5(service_size) = '".$service_size."'";
 	}
 
 	$result=mysqli_query($conn,$query);

@@ -2526,44 +2526,17 @@ function validationAdminEdit(){
 }
 
 function validationServiceAdd(){
-	$('#insertAdminForm').bootstrapValidator({
+	$('#insertServiceForm').bootstrapValidator({
 		message: 'This value is not valid',
 		fields: {
-			username: {
-				message: 'Username tidak valid',
-				validators: {
-					notEmpty: {
-						message: 'Username tidak boleh kosong'
-					},
-					stringLength: {
-						min: 6,
-						max: 30,
-						message: 'Panjang username harus lebih dari 6 dan kurang dari 30 karakter'
-					},
-					regexp: {
-						regexp: /^[a-zA-Z0-9_\.]+$/,
-						message: 'Username hanya dapat menggunakan huruf, angka, titik dan garis bawah'
-					}
-				}
-			},
 			namaD: {
 				validators: {
 					notEmpty: {
 						message: 'Nama depan tidak boleh kosong'
 					},
 					regexp: {
-						regexp: /^[a-zA-Z\.\,\ ]+$/,
+						regexp: /^[a-zA-Z0-9\-\,\ ]+$/,
 						message: 'Nama hanya dapat menggunakan huruf, titik dan koma'
-					}
-				}
-			},
-			email: {
-				validators: {
-					notEmpty: {
-						message: 'Alamat email tidak boleh kosong'
-					},
-					emailAddress: {
-						message: 'Bukan alamat email yang valid'
 					}
 				}
 			}
@@ -2572,7 +2545,7 @@ function validationServiceAdd(){
 }
 
 function validationServiceEdit(){
-	$('#editAdminForm').bootstrapValidator({
+	$('#editServiceForm').bootstrapValidator({
 		message: 'This value is not valid',
 		fields: {
 			namaD: {
@@ -2581,34 +2554,96 @@ function validationServiceEdit(){
 						message: 'Nama depan tidak boleh kosong'
 					},
 					regexp: {
-						regexp: /^[a-zA-Z\.\,\ ]+$/,
+						regexp: /^[a-zA-Z0-9\-\,\ ]+$/,
 						message: 'Nama hanya dapat menggunakan huruf, titik dan koma'
 					}
 				}
-			},
-			email: {
+			}
+		}
+	});
+}
+
+function validationServiceDetAdd(){
+	$('#insertServiceDetForm').bootstrapValidator({
+		message: 'This value is not valid',
+		fields: {
+			panjang: {
+				message: 'Panjang tidak valid',
 				validators: {
 					notEmpty: {
-						message: 'Alamat email tidak boleh kosong'
+						message: 'Panjang tidak boleh kosong'
 					},
-					emailAddress: {
-						message: 'Bukan alamat email yang valid'
+					regexp: {
+						regexp: /^[0-9]+$/,
+						message: 'Panjang hanya dapat menggunakan angka'
 					}
 				}
 			},
-			password: {
+			lebar: {
+				message: 'Lebar tidak valid',
 				validators: {
-					stringLength: {
-						min: 6,
-						message: 'Panjang username harus lebih dari 6 karakter'
+					notEmpty: {
+						message: 'Lebar tidak boleh kosong'
 					},
+					regexp: {
+						regexp: /^[0-9]+$/,
+						message: 'Lebar hanya dapat menggunakan angka'
+					}
 				}
 			},
-			re_password: {
+			harga: {
+				message: 'Harga tidak valid',
 				validators: {
-					identical: {
-						field: 'password',
-						message: 'Password tidak sama'
+					notEmpty: {
+						message: 'Harga tidak boleh kosong'
+					},
+					regexp: {
+						regexp: /^[0-9]+$/,
+						message: 'Harga hanya dapat menggunakan angka'
+					}
+				}
+			}
+		}
+	});
+}
+
+function validationServiceDetEdit(){
+	$('#editServiceDetForm').bootstrapValidator({
+		message: 'This value is not valid',
+		fields: {
+			panjang: {
+				message: 'Panjang tidak valid',
+				validators: {
+					notEmpty: {
+						message: 'Panjang tidak boleh kosong'
+					},
+					regexp: {
+						regexp: /^[0-9]+$/,
+						message: 'Panjang hanya dapat menggunakan angka'
+					}
+				}
+			},
+			lebar: {
+				message: 'Lebar tidak valid',
+				validators: {
+					notEmpty: {
+						message: 'Lebar tidak boleh kosong'
+					},
+					regexp: {
+						regexp: /^[0-9]+$/,
+						message: 'Lebar hanya dapat menggunakan angka'
+					}
+				}
+			},
+			price: {
+				message: 'Harga tidak valid',
+				validators: {
+					notEmpty: {
+						message: 'Harga tidak boleh kosong'
+					},
+					regexp: {
+						regexp: /^[0-9]+$/,
+						message: 'Harga hanya dapat menggunakan angka'
 					}
 				}
 			}

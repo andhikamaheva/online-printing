@@ -22,7 +22,7 @@ if(isset($_GET['t'])){
 		$service_lebar=$_POST["service_lebar"];
 		$service_price=$_POST["service_price"];
 		$service_layanan=$_POST["service_layanan"];
-		$query="INSERT INTO service VALUES ( ".$service_layanan.", '".$service_panjang." x ".$service_lebar."', '".$service_price."', true)";
+		$query="INSERT INTO service VALUES ( ".$service_layanan.", '".$service_panjang." x ".$service_lebar."', '".$service_price."')";
 	}
 
 	$result=mysqli_query($conn,$query);

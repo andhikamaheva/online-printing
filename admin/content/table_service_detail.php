@@ -11,8 +11,9 @@
 	<tbody>
 	<?php
 		include "../handler/connection_handler.php";
-		$query="SELECT service_det.service_name as service_name, service.service_id as service_id, service.service_active as service_active, service.service_price as service_price, service.service_size as service_size, md5(service.service_size) as size
-				FROM service left join service_det on service.service_id = service_det.service_id ";
+		$query="SELECT service_det.service_name as service_name, md5(service.service_id) as service_id, service.service_price as service_price, service.service_size as service_size, md5(service.service_size) as size
+				FROM service left join service_det on service.service_id = service_det.service_id 
+				WHERE service_det.service_det_active=true";
 		$result=mysqli_query($conn,$query);
 		while($data=mysqli_fetch_array($result)){
 		$nom++;
@@ -29,25 +30,11 @@
 							<i class="fa fa-pencil"></i> Ubah
 						</button>
 					</div>
-					<?php
-						if($data['service_active']==true){
-					?>
 					<div class="col-md-6">
-						<button class="btn btn-danger" onclick="serviceDetDelete('<?php echo $data['service_id']; ?>',false, '<?php echo $data['service_size'] ?>');">
-							<i class="fa fa-lock"></i> Non Aktif
+						<button class="btn btn-danger" onclick="serviceDetDelete('<?php echo $data['service_id']; ?>', '<?php echo $data['size'] ?>');">
+							<i class="fa fa-lock"></i> Hapus
 						</button>
 					</div>
-					<?php
-						}else{
-					?>
-					<div class="col-md-6">
-						<button class="btn btn-success" onclick="serviceDetDelete('<?php echo $data['service_id']; ?>',true, '<?php echo $data['service_size'] ?>');">
-							<i class="fa fa-unlock-alt"></i> Aktif
-						</button>
-					</div>
-					<?php
-						}
-					?>
 				</div>
 				</center>
 			</td>

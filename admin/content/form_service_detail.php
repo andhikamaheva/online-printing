@@ -19,19 +19,23 @@
 			</select>
 		</div>
 	</div>
-	<div id="grpNama" class="form-group">
+	<div id="grpUkuran" class="form-group">
 		<label class="col-sm-4 control-label">Ukuran</label>
-		<div class="col-sm-4 col-md-3">
-			<input type="text" class="form-control" name="panjang" placeholder="Panjang" data-toggle="tooltip" data-placement="bottom" title="Ukuran Panjang" required />
-		</div>
-		<div class="col-sm-4 col-md-3">
-			<input type="text" class="form-control" name="lebar" placeholder="Lebar" data-toggle="tooltip" data-placement="bottom" title="Ukuran Lebar" required />
+		<div class="col-sm-8 col-md-6">
+			<div class="row">
+				<div class="col-xs-6">
+					<input type="text" class="form-control" name="panjang" placeholder="Panjang" data-toggle="tooltip" data-placement="bottom" title="Ukuran Panjang" />
+				</div>
+				<div class="col-xs-6">
+					<input type="text" class="form-control" name="lebar" placeholder="Lebar" data-toggle="tooltip" data-placement="bottom" title="Ukuran Lebar" />
+				</div>
+			</div>
 		</div>
 	</div>
-	<div id="grpNama" class="form-group">
+	<div id="grpHarga" class="form-group">
 		<label class="col-sm-4 control-label">Harga</label>
 		<div class="col-sm-8 col-md-6">
-			<input type="text" class="form-control" name="harga" placeholder="Harga Satuan" data-toggle="tooltip" data-placement="bottom" title="Nama Layanan Dasar" required />
+			<input type="text" class="form-control" name="harga" placeholder="Harga Satuan" data-toggle="tooltip" data-placement="bottom" title="Harga Satuan Service" />
 		</div>
 	</div>
 </fieldset>
@@ -43,3 +47,12 @@
 		<button type="button" class="btn btn-danger btn-block" onclick="serviceDetReset();">Batal</button>
 	</div>
 </div>
+<script>
+	function loadSelectNama(){
+		LoadSelect2Script(selectNama);
+	}
+	function selectNama(){
+		$('select').select2();
+	}
+	LoadDataTablesScripts(loadSelectNama);
+</script>

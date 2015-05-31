@@ -1,8 +1,8 @@
 <?php
 	session_start();
 	if(isset($_SESSION['admin'])){
-		include "template/template.php";
+		include "template/index_admin.php";
 	}else{
-		include "page/page_login.php";
+		include "page/login_admin.php";
 	}
 ?>
