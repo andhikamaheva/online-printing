@@ -2287,7 +2287,7 @@ $(document).ready(function () {
 		$('div#main').toggleClass('sidebar-show');
 		setTimeout(MessagesMenuWidth, 250);
 	});
-	var page = location.hash.replace(/^#/, '');
+	//var page = location.hash.replace(/^#/, '');
 	if (page.length < 1) {
 		window.location.hash='dashboard';
 		page = 'dashboard';

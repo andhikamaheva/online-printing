@@ -6,7 +6,16 @@
 			$result = mysqli_query($conn, $sql);
 			if (mysqli_num_rows($result) > 0) {
 				while($row = mysqli_fetch_assoc($result)) {
-					echo '<a href="index.php?f='.$row["service_name"].'" class="list-group-item">'.$row["service_name"].'</a>';
+					if(isset($_GET['f'])){
+					$konten_filter=$_GET['f'];
+					$active = $row['service_name'];
+					if($konten_filter==$active){
+					echo '<a href="index.php?f='.$row["service_name"].'" class="list-group-item active">'.$row["service_name"].'</a>';
+					}
+					else{
+					echo '<a href="index.php?f='.$row["service_name"].'" class="list-group-item">'.$row["service_name"].'</a>';	
+					}
+				}
 				}
 			} else {
 				echo "0 results";
