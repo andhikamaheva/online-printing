@@ -11,6 +11,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
-            <script src="js/jquery.js"></script>
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+	<script src="js/jquery.js"></script>
 <script src="js/devoops.js"></script>
 </head>

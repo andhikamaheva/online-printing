@@ -51,15 +51,12 @@
 								Rinci
 							</a>
 						</li>
-<<<<<<< HEAD
 						<li>
 							<a class="ajax-link" href="#data_service_gambar">
 								<i class="fa fa-folder-open"></i>
 								Gambar
 							</a>
 						</li>
-=======
->>>>>>> c0ce0f8dbccce1bdc7b6999a5974f12864a796a2
 					</ul>
 				</li>
 				<li class="dropdown">
