@@ -27,6 +27,7 @@ if(isset($_GET['act'])){
 			LoadBootstrapValidatorScript(validationLoginMember);
 		</script>
 		<?php
+<<<<<<< HEAD
 	}else if($action=='register'){
 		?>
 		<form class="form-horizontal" id="loginMember">
@@ -83,6 +84,8 @@ if(isset($_GET['act'])){
 			LoadBootstrapValidatorScript(validationRegisterMember);
 		</script>
 		<?php
+=======
+>>>>>>> c0ce0f8dbccce1bdc7b6999a5974f12864a796a2
 	}
 	else if($action=='viewCart'){
 		?>
