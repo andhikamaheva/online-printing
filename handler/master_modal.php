@@ -86,6 +86,7 @@ if (isset($_GET['act'])) {
 		<?php
 } else if (($action == 'viewCart') && (isset($_SESSION['transaksi']))) {
 		?>
+		<button class="btn btn-danger" onclick=destroyCart()>Empty Cart</button>
 		<form method="post" id="checkout" >
 		<table class="table table-striped">
 			<thead>

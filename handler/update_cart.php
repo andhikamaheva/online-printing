@@ -19,6 +19,8 @@ if (isset($_GET['act'])) {
 				}
 			}
 		}
+	} else if ($_GET['act'] == 'destroy') {
+		$_SESSION["transaksi"] = $service;
 	}
 }
 
