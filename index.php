@@ -1,3 +1,4 @@
 <?php
-	include "template/template.php";
+
+include "template/template.php";
 ?>
