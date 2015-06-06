@@ -72,6 +72,23 @@ function addCart(id,size){
 $('#navbar').load('template/navbar.php');
 }
 
+function deleteCart(id,size){
+	$.ajax({    //create an ajax request to load_page.php
+		type: "POST",
+		url: "handler/update_cart.php?act=delete&id="+id,
+		dataType: "html",
+		data: { 'service_size': size },   //expect html to be returned
+		success: function(response){
+			if(response!=""){
+				alert(response);
+			}
+		}
+
+	});
+$('#cartModalContent').html(tableText);
+$('#cartModalContent').load('handler/master_modal.php?act=viewCart');
+
+}
 
 function registerModal(){
 	$('#globalModalLabel').html('Register');

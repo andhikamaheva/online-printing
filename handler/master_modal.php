@@ -103,7 +103,7 @@ foreach ($_SESSION["transaksi"] as $cart) {
 			echo '<td>' . $cart['service_name'] . '</td>';
 			echo '<td>' . $cart['service_size'] . '</td>';
 			echo '<td>' . $cart['service_price'] . '</td>';
-			echo '<td></td>';
+			echo '<td><a href="#" onclick=deleteCart("' . md5($cart['service_id']) . '","' . md5($cart['service_size']) . '")><i class="fa fa-trash-o" ></i></a></td>';
 			echo '</tr>';
 			$total += $cart['service_price'];
 			$cart++;
