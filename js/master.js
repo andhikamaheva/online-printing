@@ -4,10 +4,10 @@ var tableText="<center><div class=\'alert alert-info\'><i class=\'fa fa-spinner 
 var loginGagal="<div class=\'col-sm-12 col-md-12\'><div class=\'alert alert-danger alert-dismissible\' role=\'alert\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'><span aria-hidden=\'true\'>&times;</span></button><strong>Perhatian!</strong> Username atau password Anda salah!</div></div>";
 
 function loginModal(){
+	$('#globalModalConfirm').html('Login');
 	$('#globalModalLabel').html('Login');
 	$('#globalModalContent').html(loadingText);
 	$('#globalModalContent').load('handler/master_modal.php?act=login');
-	$('#globalModalConfirm').html('Login');
 	$('#globalModalConfirm').attr('class','btn btn-primary');
 	$('#globalModalConfirm').attr('onclick','doLogin()');
 	$('#globalModal').modal('toggle');
@@ -44,16 +44,33 @@ function doLogin(id){
 }
 
 function cartModal(){
-	$('#globalModalLabel').html('Services Cart');
-	$('#globalModalCancel').remove();
-	$('#globalModalContent').html(loadingText);
-	$('#globalModalContent').load('handler/master_modal.php?act=viewCart');
-	$('#globalModalConfirm').html('Checkout');
-	$('#globalModalConfirm').attr('class','btn btn-primary');
-	$('#globalModalConfirm').attr('onclick','doLogin()');
-	$('#globalModal').modal('toggle');
+	$('#cartModalLabel').html('Services Cart');
+	$('#cartModalCancel').remove();
+	$('#cartModalContent').html(loadingText);
+	$('#cartModalContent').load('handler/master_modal.php?act=viewCart');
+	$('#cartModalConfirm').remove();
+	$('#cartModalConfirm').attr('class','btn btn-primary');
+	$('#cartModalConfirm').attr('onclick','doLogin()');
+	$('#cartModal').modal('toggle');
 }
 
+
+function addCart(id,size){
+	$.ajax({    //create an ajax request to load_page.php
+		type: "POST",
+		url: "handler/add_cart.php?act=cart&id="+id,
+		dataType: "html",
+		data: { 'service_size': size },   //expect html to be returned
+		success: function(response){
+			if(response!=""){
+				alert(response);
+			}
+			
+		}
+
+	});
+$('#navbar').load('template/navbar.php');
+}
 
 
 function registerModal(){
