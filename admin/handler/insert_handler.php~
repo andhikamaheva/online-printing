@@ -10,7 +10,6 @@ if(isset($_GET['t'])){
 
 		$query="INSERT INTO admin VALUES ('".$admin_username."', '".$admin_password."', '".$admin_name."', '".$admin_email."', true)";
 	}
-	
 	if($_GET['t']=='service'){
 		$service_name=$_POST["service_name"];
 

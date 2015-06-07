@@ -14,9 +14,14 @@ include "navbar.php";
 		<div class="container">
 			<div class="row">
 				<?php
-include "konten.php";
-include "sidebar.php";
-?>
+				$konten_filter = $_GET['f'];
+				if($konten_filter==null or $konten_filter==""){
+					include "All_services.php";
+				}else{
+					include "konten.php";
+				}
+				include "sidebar.php";
+				?>
 			</div>
 		</div>
 		<!-- /.container -->

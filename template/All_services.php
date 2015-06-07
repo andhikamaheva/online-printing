@@ -12,7 +12,7 @@
 				while($row = mysqli_fetch_assoc($result)) {
 					echo '	
 						<div class="col-sm-4 col-lg-4 col-md-4">
-							<div class="thumbnail">
+							<div class="thumbnail panel-primary">
 								<div class="caption">
 									<center>';
 										if($row['gbr']==null){

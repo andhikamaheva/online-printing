@@ -15,7 +15,7 @@
 					<div class="no-move"></div>
 				</div>
 				<div class="box-content">
-					<p>Ini adalah project PPWeb Kelas R1 Semester 142 Kelompok 1 yang dibuat sejak bulan Februari 2015. Project ini menggunakan teknologi <a class="btn btn-primary" href="http://getbootstrap.com/" target="Bootstrap">Bootstrap</a> agar dapat responsive. Dan template dari project ini diambil dari <a class="btn btn-primary" href="http://devoops.me/themes/devoops/index.html" target="DevOOPS">DevOOPS</a> dan telah dimodifikasi oleh pengembang</p>
+					<p>Ini adalah project PPWeb Kelas R1 Semester 142 Kelompok 1 yang dibuat sejak bulan Februari 2015. Project ini menggunakan teknologi <a class="btn btn-primary" href="http://getbootstrap.com/" target="Bootstrap">Bootstrap</a> agar dapat responsive. Dan template dari project ini diambil dari <a class="btn btn-primary" href="http://startbootstrap.com/template-overviews/shop-item/">startbootstrap</a> dan telah dimodifikasi oleh pengembang</p>
 				</div>
 			</div>
 		</div>
@@ -33,7 +33,7 @@
 				<div class="box-content">
 					<div class="row">
 						<div class="col-sm-4">
-							<div class="thumbnail">
+							<div class="thumbnail panel-primary">
 								<img src="img/dev1.jpg" alt="...">
 								<div class="caption">
 									<h3>Muhammad Hassanuddin</h3>
@@ -48,7 +48,7 @@
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<div class="thumbnail">
+							<div class="thumbnail panel-primary">
 								<img src="img/dev2.jpg" alt="Andhika Maheva Wicaksono">
 								<div class="caption">
 									<h3>Andhika Maheva Wicaksono</h3>
@@ -63,7 +63,7 @@
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<div class="thumbnail">
+							<div class="thumbnail panel-primary">
 								<img src="img/dev3.jpg" alt="...">
 								<div class="caption">
 									<h3>Indra Pradana Andrianto</h3>

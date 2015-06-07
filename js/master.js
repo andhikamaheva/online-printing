@@ -2,6 +2,8 @@ var loadingText="<center><span class=\'alert alert-info\'><i class=\'fa fa-spinn
 var processText="<center><span class=\'alert alert-info\'><i class=\'fa fa-spinner fa-spin fa-lg\'></i> Sedang Memproses...</span></center>";
 var tableText="<center><div class=\'alert alert-info\'><i class=\'fa fa-spinner fa-spin fa-lg\'></i> Menyegarkan Data...</div></center>";
 var loginGagal="<div class=\'col-sm-12 col-md-12\'><div class=\'alert alert-danger alert-dismissible\' role=\'alert\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'><span aria-hidden=\'true\'>&times;</span></button><strong>Perhatian!</strong> Username atau password Anda salah!</div></div>";
+var loginGagal="<div class=\'col-sm-12 col-md-12\'><div class=\'alert alert-danger alert-dismissible\' role=\'alert\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'><span aria-hidden=\'true\'>&times;</span></button><strong>Perhatian!</strong> registrasi gagal! Username atau email telah terdaftar</div></div>";
+var registerSucces="<div class=\'col-sm-12 col-md-12\'><div class=\'alert alert-success alert-dismissible\' role=\'alert\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'><span aria-hidden=\'true\'>&times;</span></button><b>Registrasi Berhasil!</b> Silahkan login dengan akun Anda</div></div>";
 
 function loginModal(){
 	$('#globalModalConfirm').html('Login');
@@ -10,7 +12,19 @@ function loginModal(){
 	$('#globalModalContent').load('handler/master_modal.php?act=login');
 	$('#globalModalConfirm').attr('class','btn btn-primary');
 	$('#globalModalConfirm').attr('onclick','doLogin()');
-	$('#registerConfirm').attr('onclick','registerModal()');
+	$('#registerConfirm').attr('onclick','loadRegister()');
+	//$('#globalModal').modal('toggle');
+}
+
+
+function loadLoginModal(){
+	$('#globalModalConfirm').html('Login');
+	$('#globalModalLabel').html('Login');
+	$('#globalModalContent').html(loadingText);
+	$('#globalModalContent').load('handler/master_modal.php?act=login');
+	$('#globalModalConfirm').attr('class','btn btn-primary');
+	$('#globalModalConfirm').attr('onclick','doLogin()');
+	$('#registerConfirm').attr('onclick','loadRegister()');
 	$('#globalModal').modal('toggle');
 }
 
@@ -36,6 +50,16 @@ function orderConfirmModal(){
 	$('#globalModal').modal('toggle');
 }
 
+
+function loadRegisterModal(){
+	$('#globalModalLabel').html('Register');
+	$('#globalModalContent').html(loadingText);
+	$('#globalModalContent').load('handler/master_modal.php?act=register');
+	$('#globalModalConfirm').html('Register');
+	$('#globalModalConfirm').attr('class','btn btn-primary');
+	$('#globalModalConfirm').attr('onclick','doRegister()');
+	$('#globalModal').modal('toggle');
+}
 
 function registerModal(){
 	$('#globalModalLabel').html('Register');
@@ -64,16 +88,6 @@ function loadCart(){
 	$('#cartModal').on('hidden.bs.modal', function (e) {$('#navbar').load('template/navbar.php');});
 }
 
-/**function loadRegister(){
-	$('#globalModalContent').html(loadingText);
-	$('#globalModalLabel').html('Register');
-	$('#globalModalContent').html(loadingText);
-	$('#globalModalContent').load('handler/master_modal.php?act=register');
-	$('#globalModalConfirm').html('Register');
-	$('#globalModalConfirm').attr('class','btn btn-primary');
-	$('#globalModalConfirm').attr('onclick','doRegister()');
-	
-}*/
 
 function doLogin(id){
 	username=$('#globalModal').find( "input[name='username']" ).val();
@@ -81,7 +95,7 @@ function doLogin(id){
 	error=$('#globalModal').find('.has-error').length;
 	if(username!="" && error==0 && password!=""){
 		//$('#globalModalContent').html(processText);
-		$.ajax({    //create an ajax request to load_page.php
+		$.ajax({    //crseate an ajax request to load_page.php
 			type: "POST",
 			url: "handler/login_handler.php",
 			dataType: "html",
@@ -92,7 +106,6 @@ function doLogin(id){
 					//alert(response);
 					$('#errorLogin').html(loginGagal);
 					//alert('Username atau password salah!');
-
 				}
 				else{
 					$('#globalModal').html(processText);
@@ -101,6 +114,44 @@ function doLogin(id){
 				}
 			}
 		});
+	}
+}
+
+function doRegister(){
+	name = $('#registerMember').find( "input[name='name']" ).val();
+	username = $('#registerMember').find( "input[name='username']" ).val();
+	email = $('#registerMember').find( "input[name='email']" ).val();
+	password = $('#registerMember').find( "input[name='password']" ).val();
+	retype = $('#registerMember').find( "input[name='retype']" ).val();
+	phone = $('#registerMember').find( "input[name='phone']" ).val();
+	address = $('#registerMember').find( "input[name='address']" ).val();
+	error = $('#registerMember').find('.has-error').length;
+	if(name != "" && username != "" && email != "" && password != "" && phone != "" && address !== "" && error ==0){
+		if(password == retype){
+			$('#errorRegister').html(processText);
+			$.ajax({
+				type : "POST",
+				url : "handler/inset_handler.php?act=register",
+				dataType : "html",
+				data : {
+					'member_name' : name,
+					'member_username' : username,
+					'member_pass' : password,
+					'member_phone'  : phone,
+					'member_email' : email,
+					'member_address' : address
+				},
+				success : function(response){
+					if(response != ""){
+						$('#errorRegister').html(response);
+					}
+					else{
+						//$('#errorRegister').html(response);
+					}
+				}
+
+			});
+		}
 	}
 }
 
@@ -118,7 +169,6 @@ function addCart(id,size){
 				alert(response);
 			}
 		}
-
 	});
 	$('#navbar').load('template/navbar.php');
 }
@@ -138,7 +188,6 @@ function deleteCart(id,size){
 	});
 	$('#cartModalContent').html(tableText);
 	$('#cartModalContent').load('handler/master_modal.php?act=viewCart');
-
 }
 
 
@@ -157,7 +206,5 @@ function destroyCart() {
 	});
 	$('#cartModalContent').html(tableText);
 	$('#cartModalContent').load('handler/master_modal.php?act=viewCart');
-
-	
 }
 

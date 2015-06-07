@@ -6,7 +6,6 @@ if (isset($_GET['logout'])) {
 		session_start();
 		unset($_SESSION['admin']);
 		session_destroy();
-
 	}
 }
 session_start();
@@ -27,10 +26,10 @@ $_SESSION["url"] = $current_url;
 			<button type="button" style="background:#337ab7;color:white;" class="navbar-toggle" onclick="cartModal()">
 				<span class="glyphicon glyphicon-shopping-cart"></span>
 			</button>
-			<a href="index.php?f=All">
+			<a href="index.php">
 				<img src="img/logo-200.png" class="nav-logo">
 			</a>
-			<a class="navbar-brand" href="index.php?f=All">LUG Printing</a>
+			<a class="navbar-brand" href="index.php">LUG Printing</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -39,7 +38,7 @@ $_SESSION["url"] = $current_url;
 session_start();
 if (isset($_SESSION['admin'])) {
 	echo '<li>
-					<a href="index.php?f=All">Services</a>
+					<a href="index.php">Services</a>
 				</li>
 				<li>
 					<a href="index.php?f=contact">Contact</a>
@@ -50,16 +49,16 @@ if (isset($_SESSION['admin'])) {
 				';
 } else {
 	echo '<li>
-				<a href="index.php?f=All">Services</a>
+				<a href="index.php">Services</a>
 			</li>
 			<li>
 				<a href="index.php?f=contact">Contact</a>
 			</li>
 			<li>
-				<a href="#" onclick="loginModal()">Login</a>
+				<a href="#" onclick="loadLoginModal()">Login</a>
 			</li>
 			<li>
-				<a onclick="registerModal()" href="#">Register</a>
+				<a onclick="loadRegisterModal()" href="#">Register</a>
 			</li>
 			<li>
 				<a href="index.php?f=about">About</a>

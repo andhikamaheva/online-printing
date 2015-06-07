@@ -19,7 +19,7 @@ if (isset($_GET['act'])) {
 					<label class="col-sm-4 control-label">Password</label>
 					<div class="col-sm-8 col-md-6">
 						<input type="password" class="form-control" id="password" name="password" placeholder="Password Anda"  title="Password Anda"/>
-						<p style="padding-top:5px;">Belum punya akun ? <a href="#" id="registerConfirm" onclick=registerModal()>Daftar disini</a></p>
+						<p style="padding-top:5px;">Belum punya akun ? <a href="#" id="registerModal()" onclick=registerModal()>Daftar disini</a></p>
 					</div>
 				</div>
 
@@ -31,10 +31,9 @@ if (isset($_GET['act'])) {
 		<?php
 } else if ($action == 'register') {
 		?>
-		<form class="form-horizontal" id="loginMember">
+		<form class="form-horizontal" id="registerMember">
 			<fieldset>
-				<div class="form-group" id="errorLogin">
-
+				<div class="form-group" id="errorRegister">
 				</div>
 				<div class="form-group">
 					<label class="col-sm-4 control-label">Name</label>
@@ -63,7 +62,7 @@ if (isset($_GET['act'])) {
 				<div class="form-group">
 					<label class="col-sm-4 control-label">Retype Password</label>
 					<div class="col-sm-8 col-md-6">
-						<input type="password" class="form-control" id="password1" name="password1" placeholder="Masukkan ulang password Anda"  title="Password Anda"/>
+						<input type="password" class="form-control" id="retype" name="retype" placeholder="Masukkan ulang password Anda"  title="Password Anda"/>
 					</div>
 				</div>
 				<div class="form-group">
@@ -76,9 +75,9 @@ if (isset($_GET['act'])) {
 					<label class="col-sm-4 control-label">Address</label>
 					<div class="col-sm-8 col-md-6">
 						<input type="text" class="form-control" autofocus="on" id="address" name="address" placeholder="Alamat Anda" />
+						<p>Sudah punya akun ? <a href="#" onclick=loginModal()>Login disini</a></p>
 					</div>
 				</div>
-
 			</fieldset>
 		</form>
 		<script type="text/javascript">
@@ -195,9 +194,15 @@ foreach ($_SESSION["transaksi"] as $cart) {
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-4 control-label">Asal Bank</label>
+					<label class="col-sm-4 control-label">Bank Tujuan</label>
 					<div class="col-sm-8 col-md-6">
-						<input type="text" class="form-control" autofocus="on" id="username" name="username" placeholder="BCA / BRi / CIMB dll" />
+						<input type="radio" > BCA
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Bank Asal</label>
+					<div class="col-sm-8 col-md-6">
+						<input type="text" class="form-control" autofocus="on" id="username" name="username" placeholder="BCA / BRI / CIMB dll" />
 					</div>
 				</div>
 				<div class="form-group">
