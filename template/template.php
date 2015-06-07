@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 	<?php
-		include "header.php";
-		include "admin/handler/connection_handler.php";
-	?>
+include "header.php";
+include "admin/handler/connection_handler.php";
+?>
 	<body>
 		<div id="navbar">
 		<?php
-		include "navbar.php";
-		?>
+include "navbar.php";
+?>
 		</div>
 		<!-- Page Content -->
 		<div class="container">
 			<div class="row">
 				<?php
-					include "konten.php";
-					include "sidebar.php";
-				?>
+include "konten.php";
+include "sidebar.php";
+?>
 			</div>
 		</div>
 		<!-- /.container -->

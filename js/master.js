@@ -10,9 +10,70 @@ function loginModal(){
 	$('#globalModalContent').load('handler/master_modal.php?act=login');
 	$('#globalModalConfirm').attr('class','btn btn-primary');
 	$('#globalModalConfirm').attr('onclick','doLogin()');
+	$('#registerConfirm').attr('onclick','registerModal()');
 	$('#globalModal').modal('toggle');
-	
 }
+
+function settingModal(){
+	$('#globalModalConfirm').html('Save');
+	$('#globalModalLabel').html('Pengaturan');
+	$('#globalModalContent').html(loadingText);
+	$('#globalModalContent').load('handler/master_modal.php?act=setting');
+	$('#globalModalConfirm').attr('class','btn btn-primary');
+	$('#globalModalConfirm').attr('onclick','doLogin()');
+	$('#registerConfirm').attr('onclick','registerModal()');
+	$('#globalModal').modal('toggle');
+}
+
+function orderConfirmModal(){
+	$('#globalModalLabel').html('Konfirmasi Pembayaran');
+	$('#globalModalConfirm').html('Konfirmasi');
+	$('#globalModalContent').html(loadingText);
+	$('#globalModalContent').load('handler/master_modal.php?act=confirm');
+	$('#globalModalConfirm').attr('class','btn btn-primary');
+	$('#globalModalConfirm').attr('onclick','doLogin()');
+	$('#registerConfirm').attr('onclick','registerModal()');
+	$('#globalModal').modal('toggle');
+}
+
+
+function registerModal(){
+	$('#globalModalLabel').html('Register');
+	$('#globalModalContent').html(loadingText);
+	$('#globalModalContent').load('handler/master_modal.php?act=register');
+	$('#globalModalConfirm').html('Register');
+	$('#globalModalConfirm').attr('class','btn btn-primary');
+	$('#globalModalConfirm').attr('onclick','doRegister()');
+	//$('#globalModal').modal('toggle');
+}
+
+
+function cartModal(){
+	$('#cartModalLabel').html('Services Cart');
+	$('#cartModalCancel').remove();
+	$('#cartModalContent').html(loadingText);
+	$('#cartModalContent').load('handler/master_modal.php?act=viewCart');
+	$('#cartModalConfirm').remove();
+	$('#cartModalConfirm').attr('class','btn btn-primary');
+	$('#cartModalConfirm').attr('onclick','doLogin()');
+	$('#cartModal').modal('toggle');
+	loadCart();
+}
+
+function loadCart(){
+	$('#cartModal').on('hidden.bs.modal', function (e) {$('#navbar').load('template/navbar.php');});
+}
+
+/**function loadRegister(){
+	$('#globalModalContent').html(loadingText);
+	$('#globalModalLabel').html('Register');
+	$('#globalModalContent').html(loadingText);
+	$('#globalModalContent').load('handler/master_modal.php?act=register');
+	$('#globalModalConfirm').html('Register');
+	$('#globalModalConfirm').attr('class','btn btn-primary');
+	$('#globalModalConfirm').attr('onclick','doRegister()');
+	
+}*/
 
 function doLogin(id){
 	username=$('#globalModal').find( "input[name='username']" ).val();
@@ -43,17 +104,7 @@ function doLogin(id){
 	}
 }
 
-function cartModal(){
-	$('#cartModalLabel').html('Services Cart');
-	$('#cartModalCancel').remove();
-	$('#cartModalContent').html(loadingText);
-	$('#cartModalContent').load('handler/master_modal.php?act=viewCart');
-	$('#cartModalConfirm').remove();
-	$('#cartModalConfirm').attr('class','btn btn-primary');
-	$('#cartModalConfirm').attr('onclick','doLogin()');
-	$('#cartModal').modal('toggle');
-	loadCart();
-}
+
 
 
 function addCart(id,size){
@@ -90,12 +141,7 @@ function deleteCart(id,size){
 
 }
 
-function loadCart(){
-	$('#cartModal').on('hidden.bs.modal', function (e) {
-		$('#navbar').load('template/navbar.php');
-	})
-	
-}
+
 
 function destroyCart() {
 	$.ajax({
@@ -115,12 +161,3 @@ function destroyCart() {
 	
 }
 
-function registerModal(){
-	$('#globalModalLabel').html('Register');
-	$('#globalModalContent').html(loadingText);
-	$('#globalModalContent').load('handler/master_modal.php?act=register');
-	$('#globalModalConfirm').html('Register');
-	$('#globalModalConfirm').attr('class','btn btn-primary');
-	$('#globalModalConfirm').attr('onclick','doRegister()');
-	$('#globalModal').modal('toggle');
-}

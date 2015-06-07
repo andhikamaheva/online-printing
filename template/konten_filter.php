@@ -1,6 +1,5 @@
 <?php
 session_start();
-$current_url = base64_encode($url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 if (isset($_GET['f']) or isset($_GET['logout'])) {
 	$konten_filter = $_GET['f'];
 	if ($konten_filter == 'All' or $_GET['logout'] == 'true') {

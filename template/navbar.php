@@ -9,7 +9,11 @@ if (isset($_GET['logout'])) {
 
 	}
 }
+session_start();
+$current_url = base64_encode($url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+$_SESSION["url"] = $current_url;
 ?>
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -35,7 +39,7 @@ if (isset($_GET['logout'])) {
 session_start();
 if (isset($_SESSION['admin'])) {
 	echo '<li>
-					<a href="index.phpf=All">Services</a>
+					<a href="index.php?f=All">Services</a>
 				</li>
 				<li>
 					<a href="index.php?f=contact">Contact</a>
@@ -46,7 +50,7 @@ if (isset($_SESSION['admin'])) {
 				';
 } else {
 	echo '<li>
-				<a href="index.php">Services</a>
+				<a href="index.php?f=All">Services</a>
 			</li>
 			<li>
 				<a href="index.php?f=contact">Contact</a>
@@ -79,9 +83,9 @@ if (isset($_SESSION['admin'])) {
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user">&nbsp;' . $_SESSION['admin']['admin_name'] . '</span><span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
-					<li><a href="#">Layanan</a></li>
-					<li><a href="#">Konfirmasi Pembayaran</a></li>
-					<li><a href="#">Pengaturan</a></li>
+					<li><a href="invoice.php">Layanan</a></li>
+					<li><a href="#" onclick="orderConfirmModal()">Konfirmasi Pembayaran</a></li>
+					<li><a href="#" onclick=settingModal()>Pengaturan</a></li>
 					<li class="divider"></li>
 					<li><a href="index.php?logout=true">Keluar</a></li>
 				</ul>

@@ -19,6 +19,7 @@ if (isset($_GET['act'])) {
 					<label class="col-sm-4 control-label">Password</label>
 					<div class="col-sm-8 col-md-6">
 						<input type="password" class="form-control" id="password" name="password" placeholder="Password Anda"  title="Password Anda"/>
+						<p style="padding-top:5px;">Belum punya akun ? <a href="#" id="registerConfirm" onclick=registerModal()>Daftar disini</a></p>
 					</div>
 				</div>
 
@@ -84,48 +85,158 @@ if (isset($_GET['act'])) {
 			LoadBootstrapValidatorScript(validationRegisterMember);
 		</script>
 		<?php
-} else if (($action == 'viewCart') && (isset($_SESSION['transaksi']))) {
-		?>
-		<button class="btn btn-danger" onclick=destroyCart()>Empty Cart</button>
-		<form method="post" id="checkout" >
-		<table class="table table-striped">
-			<thead>
-				<th>Service ID</th>
-				<th>Name</th>
-				<th>Size</th>
-				<th>Price</th>
-				<th>Delete</th>
-			</thead>
-			<tbody>
-				<?php
+} else if (($action == 'viewCart')) {
+		if (isset($_SESSION['transaksi'])) {
+
+			?>
+			<button class="btn btn-danger" onclick=destroyCart()>Empty Cart</button>
+			<form method="post" id="checkout" >
+				<table class="table table-striped">
+					<thead>
+						<th>Service ID</th>
+						<th>Name</th>
+						<th>Size</th>
+						<th>Price</th>
+						<th>Delete</th>
+					</thead>
+					<tbody>
+						<?php
 foreach ($_SESSION["transaksi"] as $cart) {
-			echo '<tr>';
-			echo '<td>' . $cart['service_id'] . '</td>';
-			echo '<td>' . $cart['service_name'] . '</td>';
-			echo '<td>' . $cart['service_size'] . '</td>';
-			echo '<td>' . $cart['service_price'] . '</td>';
-			echo '<td><a href="#" onclick=deleteCart("' . md5($cart['service_id']) . '","' . md5($cart['service_size']) . '")><i class="fa fa-trash-o" ></i></a></td>';
-			echo '</tr>';
-			$total += $cart['service_price'];
-			$cart++;
+				echo '<tr>';
+				echo '<td>' . $cart['service_id'] . '</td>';
+				echo '<td>' . $cart['service_name'] . '</td>';
+				echo '<td>' . $cart['service_size'] . '</td>';
+				echo '<td>' . $cart['service_price'] . '</td>';
+				echo '<td><a href="#" onclick=deleteCart("' . md5($cart['service_id']) . '","' . md5($cart['service_size']) . '")><i class="fa fa-trash-o" ></i></a></td>';
+				echo '</tr>';
+				$total += $cart['service_price'];
+				$cart++;
+			}
+			?>
+
+
+
+					</tbody>
+				</table>
+
+				<h4>Total :  <?php echo 'Rp. ' . number_format($total, 0, "", ".") . ''?></h4>
+				<button class="btn btn-primary pull-right">
+					Checkout
+				</button>
+
+			</form>
+			<?php
+} else {
+			echo "<center><h3>Belum Ada Transaksi</h3></center>";
 		}
+	} else if ($action == "setting") {
+		?>
+				<form class="form-horizontal" id="loginMember">
+			<fieldset>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Name</label>
+					<div class="col-sm-8 col-md-6">
+						<input type="text" class="form-control" autofocus="on" id="name" name="name" placeholder="Nama Anda" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Username</label>
+					<div class="col-sm-8 col-md-6">
+						<input type="text" class="form-control" autofocus="on" id="username" readonly="" name="username" placeholder="Username Anda" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Email</label>
+					<div class="col-sm-8 col-md-6">
+						<input type="text" class="form-control" autofocus="on" id="email" name="email" placeholder="Email Anda" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Password</label>
+					<div class="col-sm-8 col-md-6">
+						<input type="password" class="form-control" id="password" name="password" placeholder="Password Anda"  title="Password Anda"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Retype Password</label>
+					<div class="col-sm-8 col-md-6">
+						<input type="password" class="form-control" id="password1" name="password1" placeholder="Masukkan ulang password Anda"  title="Password Anda"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Phone</label>
+					<div class="col-sm-8 col-md-6">
+						<input type="text" class="form-control" autofocus="on" id="phone" name="phone" placeholder="Nomor hp/telp Anda" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Address</label>
+					<div class="col-sm-8 col-md-6">
+						<input type="text" class="form-control" autofocus="on" id="address" name="address" placeholder="Alamat Anda" />
+					</div>
+				</div>
+
+			</fieldset>
+		</form>
+	<?php } else if ($action == "confirm") {
 		?>
 
 
+<form class="form-horizontal" id="loginMember">
+			<fieldset>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Invoice No.</label>
+					<div class="col-sm-8 col-md-6">
+						<select class="populate placeholder form-control">
+							<option>LUG-001</option>
+							<option>LUG-002</option>
+							<option>LUG-003</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Asal Bank</label>
+					<div class="col-sm-8 col-md-6">
+						<input type="text" class="form-control" autofocus="on" id="username" name="username" placeholder="BCA / BRi / CIMB dll" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Norek. Pengirim</label>
+					<div class="col-sm-8 col-md-6">
+						<input type="text" class="form-control" autofocus="on" id="email" name="email" placeholder="xxxxxx" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Atas Nama</label>
+					<div class="col-sm-8 col-md-6">
+						<input type="text" class="form-control" autofocus="on" id="address" name="address" placeholder="Nama Pengirim" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Bukti Transfer</label>
+					<div class="col-sm-8 col-md-6">
+						<input type="file" class="form-control" id="password" name="password" placeholder="Bukti Transfer"  title="Password Anda"/>
+						<p style="color:gray;"* >Max. Size 500kB. Format JPG/PNG</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Catatan</label>
+					<div class="col-sm-8 col-md-6">
+						<input type="password" class="form-control" id="password1" name="password1" placeholder="Masukkan Pesan"  title="Password Anda"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Total</label>
+					<div class="col-sm-8 col-md-6">
+						<input type="text" class="form-control" autofocus="on" id="phone" name="phone" placeholder="Masukkan Total Transfer" />
+					</div>
+				</div>
 
-			</tbody>
-		</table>
 
-		<h4>Total :  <?php echo 'Rp. ' . number_format($total, 0, "", ".") . ''?></h4>
-		<button class="btn btn-primary pull-right">
-		Checkout
-		</button>
-
+			</fieldset>
 		</form>
 		<?php
+}
 
-	} else {
-		echo "<center><h3>Belum Ada Transaksi</h3></center>";
-	}
 }
 ?>
