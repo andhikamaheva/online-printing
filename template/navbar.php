@@ -4,7 +4,7 @@ if (isset($_GET['logout'])) {
 	$action = $_GET['logout'];
 	if ($action == 'true') {
 		session_start();
-		unset($_SESSION['admin']);
+		unset($_SESSION['member']);
 		session_destroy();
 	}
 }
@@ -36,7 +36,7 @@ $_SESSION["url"] = $current_url;
 			<ul class="nav navbar-nav">
 				<?php
 session_start();
-if (isset($_SESSION['admin'])) {
+if (isset($_SESSION['member'])) {
 	echo '<li>
 					<a href="index.php">Services</a>
 				</li>
@@ -77,10 +77,10 @@ echo $i;
 
 		<?php
 session_start();
-if (isset($_SESSION['admin'])) {
+if (isset($_SESSION['member'])) {
 	echo '
 			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user">&nbsp;' . $_SESSION['admin']['admin_name'] . '</span><span class="caret"></span></a>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>&nbsp;' . trim($_SESSION['member']['member_name']) . '<span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
 					<li><a href="invoice.php">Layanan</a></li>
 					<li><a href="#" onclick="orderConfirmModal()">Konfirmasi Pembayaran</a></li>

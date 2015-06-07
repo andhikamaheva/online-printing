@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "connection_handler.php";
 if (isset($_GET['act'])) {
 	$action = $_GET['act'];
 	if ($action == 'login') {
@@ -130,24 +131,25 @@ foreach ($_SESSION["transaksi"] as $cart) {
 		}
 	} else if ($action == "setting") {
 		?>
+
 				<form class="form-horizontal" id="loginMember">
 			<fieldset>
 				<div class="form-group">
 					<label class="col-sm-4 control-label">Name</label>
 					<div class="col-sm-8 col-md-6">
-						<input type="text" class="form-control" autofocus="on" id="name" name="name" placeholder="Nama Anda" />
+						<input type="text" class="form-control" autofocus="on" id="name" name="name" value="<?php echo trim($_SESSION['member']['member_name']);?>" placeholder="Nama Anda" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-4 control-label">Username</label>
 					<div class="col-sm-8 col-md-6">
-						<input type="text" class="form-control" autofocus="on" id="username" readonly="" name="username" placeholder="Username Anda" />
+						<input type="text" class="form-control" autofocus="on" id="username" value="<?php echo trim($_SESSION['member']['member_username']);?>" readonly="" name="username" placeholder="Username Anda" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-4 control-label">Email</label>
 					<div class="col-sm-8 col-md-6">
-						<input type="text" class="form-control" autofocus="on" id="email" name="email" placeholder="Email Anda" />
+						<input type="email" class="form-control" autofocus="on" id="email" name="email" value="<?php echo trim($_SESSION['member']['member_email']);?>" placeholder="Email Anda" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -165,13 +167,13 @@ foreach ($_SESSION["transaksi"] as $cart) {
 				<div class="form-group">
 					<label class="col-sm-4 control-label">Phone</label>
 					<div class="col-sm-8 col-md-6">
-						<input type="text" class="form-control" autofocus="on" id="phone" name="phone" placeholder="Nomor hp/telp Anda" />
+						<input type="text" class="form-control" autofocus="on" id="phone" name="phone" value="<?php echo trim($_SESSION['member']['member_phone']);?>" placeholder="Nomor hp/telp Anda" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-4 control-label">Address</label>
 					<div class="col-sm-8 col-md-6">
-						<input type="text" class="form-control" autofocus="on" id="address" name="address" placeholder="Alamat Anda" />
+						<input type="text" class="form-control" autofocus="on" id="address" name="address" value="<?php echo trim($_SESSION['member']['member_address']);?>" placeholder="Alamat Anda" />
 					</div>
 				</div>
 

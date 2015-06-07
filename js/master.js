@@ -2,8 +2,6 @@ var loadingText="<center><span class=\'alert alert-info\'><i class=\'fa fa-spinn
 var processText="<center><span class=\'alert alert-info\'><i class=\'fa fa-spinner fa-spin fa-lg\'></i> Sedang Memproses...</span></center>";
 var tableText="<center><div class=\'alert alert-info\'><i class=\'fa fa-spinner fa-spin fa-lg\'></i> Menyegarkan Data...</div></center>";
 var loginGagal="<div class=\'col-sm-12 col-md-12\'><div class=\'alert alert-danger alert-dismissible\' role=\'alert\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'><span aria-hidden=\'true\'>&times;</span></button><strong>Perhatian!</strong> Username atau password Anda salah!</div></div>";
-var loginGagal="<div class=\'col-sm-12 col-md-12\'><div class=\'alert alert-danger alert-dismissible\' role=\'alert\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'><span aria-hidden=\'true\'>&times;</span></button><strong>Perhatian!</strong> registrasi gagal! Username atau email telah terdaftar</div></div>";
-var registerSucces="<div class=\'col-sm-12 col-md-12\'><div class=\'alert alert-success alert-dismissible\' role=\'alert\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'><span aria-hidden=\'true\'>&times;</span></button><b>Registrasi Berhasil!</b> Silahkan login dengan akun Anda</div></div>";
 
 function loginModal(){
 	$('#globalModalConfirm').html('Login');
@@ -89,7 +87,7 @@ function loadCart(){
 }
 
 
-function doLogin(id){
+function doLogin(){
 	username=$('#globalModal').find( "input[name='username']" ).val();
 	password=$('#globalModal').find("input[name='password']").val();
 	error=$('#globalModal').find('.has-error').length;
@@ -99,8 +97,8 @@ function doLogin(id){
 			type: "POST",
 			url: "handler/login_handler.php",
 			dataType: "html",
-			data: { 'admin_username': username,
-					'admin_password' : password },   //expect html to be returned
+			data: { 'member_username': username,
+					'member_password' : password },   //expect html to be returned
 					success: function(response){
 						if(response!=""){
 					//alert(response);
@@ -131,7 +129,7 @@ function doRegister(){
 			$('#errorRegister').html(processText);
 			$.ajax({
 				type : "POST",
-				url : "handler/inset_handler.php?act=register",
+				url : "handler/insert_handler.php?act=register",
 				dataType : "html",
 				data : {
 					'member_name' : name,
