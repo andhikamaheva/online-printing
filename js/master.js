@@ -145,9 +145,6 @@ function doRegister(){
 					if(response != ""){
 						$('#errorRegister').html(response);
 					}
-					else{
-						//$('#errorRegister').html(response);
-					}
 				}
 
 			});
