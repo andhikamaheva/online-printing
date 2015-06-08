@@ -32,8 +32,7 @@ function settingModal(){
 	$('#globalModalContent').html(loadingText);
 	$('#globalModalContent').load('handler/master_modal.php?act=setting');
 	$('#globalModalConfirm').attr('class','btn btn-primary');
-	$('#globalModalConfirm').attr('onclick','doLogin()');
-	$('#registerConfirm').attr('onclick','registerModal()');
+	$('#globalModalConfirm').attr('onclick','doSetting()');
 	$('#globalModal').modal('toggle');
 }
 
@@ -144,6 +143,7 @@ function doRegister(){
 				success : function(response){
 					if(response != ""){
 						$('#errorRegister').html(response);
+
 					}
 				}
 
@@ -152,6 +152,47 @@ function doRegister(){
 	}
 }
 
+
+function doSetting(){
+	name = $('#settingMember').find( "input[name='name']" ).val();
+	username = $('#settingMember').find( "input[name='username']" ).val();
+	email = $('#settingMember').find( "input[name='email']" ).val();
+	password = $('#settingMember').find( "input[name='password']" ).val();
+	retype = $('#settingMember').find( "input[name='retype']" ).val();
+	phone = $('#settingMember').find( "input[name='phone']" ).val();
+	address = $('#settingMember').find( "input[name='address']" ).val();
+	error = $('#settingMember').find('.has-error').length;
+	if(name != "" && username != "" && email != "" && password != "" && phone != "" && address !== "" && error ==0){
+		if(password == retype){
+			$('#errorSetting').html(processText);
+			$.ajax({
+				type : "POST",
+				url : "handler/insert_handler.php?act=update",
+				dataType : "html",
+				data : {
+					'member_name' : name,
+					'member_username' : username,
+					'member_pass' : password,
+					'member_phone'  : phone,
+					'member_email' : email,
+					'member_address' : address
+				},
+				success : function(response){
+					if(response != ""){
+						$('#errorSetting').html(response);
+						//$('#navbar').load('template/navbar.php');
+						loadNavbar();
+					}
+				}
+
+			});
+		}
+	}
+}
+
+function loadNavbar(){
+	$('#globalModal').on('hidden.bs.modal', function (e) {$('#navbar').load('template/navbar.php');});
+}
 
 
 
@@ -225,6 +266,8 @@ function destroyCart() {
 		}
 	});
 	$('#cartModalContent').html(tableText);
+	$('#checkoutList').load('handler/table_checkout.php');
 	$('#cartModalContent').load('handler/master_modal.php?act=viewCart');
+
 }
 

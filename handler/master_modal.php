@@ -128,8 +128,10 @@ foreach ($_SESSION["transaksi"] as $cart) {
 	} else if ($action == "setting") {
 		?>
 
-				<form class="form-horizontal" id="loginMember">
+				<form class="form-horizontal" id="settingMember">
 			<fieldset>
+			<div class="form-group" id="errorSetting">
+				</div>
 				<div class="form-group">
 					<label class="col-sm-4 control-label">Name</label>
 					<div class="col-sm-8 col-md-6">
@@ -145,7 +147,7 @@ foreach ($_SESSION["transaksi"] as $cart) {
 				<div class="form-group">
 					<label class="col-sm-4 control-label">Email</label>
 					<div class="col-sm-8 col-md-6">
-						<input type="email" class="form-control" autofocus="on" id="email" name="email" value="<?php echo trim($_SESSION['member']['member_email']);?>" placeholder="Email Anda" />
+						<input type="email" class="form-control" autofocus="on" id="email" name="email" value="<?php echo trim($_SESSION['member']['member_email']);?>" placeholder="Email Anda" data-toggle="tooltip" data-placement="bottom" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -157,7 +159,7 @@ foreach ($_SESSION["transaksi"] as $cart) {
 				<div class="form-group">
 					<label class="col-sm-4 control-label">Retype Password</label>
 					<div class="col-sm-8 col-md-6">
-						<input type="password" class="form-control" id="password1" name="password1" placeholder="Masukkan ulang password Anda"  title="Password Anda"/>
+						<input type="password" class="form-control" id="password1" name="retype" placeholder="Masukkan ulang password Anda"  title="Password Anda"/>
 					</div>
 				</div>
 				<div class="form-group">
