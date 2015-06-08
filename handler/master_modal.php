@@ -90,7 +90,7 @@ if (isset($_GET['act'])) {
 
 			?>
 			<button class="btn btn-danger" onclick=destroyCart()>Empty Cart</button>
-			<form method="post" id="checkout" >
+			<form method="post" id="checkout"action="checkout.php">
 				<table class="table table-striped">
 					<thead>
 						<th>Service ID</th>
@@ -113,14 +113,10 @@ foreach ($_SESSION["transaksi"] as $cart) {
 				$cart++;
 			}
 			?>
-
-
-
 					</tbody>
 				</table>
-
 				<h4>Total :  <?php echo 'Rp. ' . number_format($total, 0, "", ".") . ''?></h4>
-				<button class="btn btn-primary pull-right">
+				<button class="btn btn-primary pull-right" type="submit">
 					Checkout
 				</button>
 

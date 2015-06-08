@@ -76,8 +76,7 @@ function cartModal(){
 	$('#cartModalContent').html(loadingText);
 	$('#cartModalContent').load('handler/master_modal.php?act=viewCart');
 	$('#cartModalConfirm').remove();
-	$('#cartModalConfirm').attr('class','btn btn-primary');
-	$('#cartModalConfirm').attr('onclick','doLogin()');
+	
 	$('#cartModal').modal('toggle');
 	loadCart();
 }
@@ -107,6 +106,7 @@ function doLogin(){
 				}
 				else{
 					$('#globalModal').html(processText);
+					$('#checkoutList').load('handler/table_checkout.php');
 					$('#globalModal').modal('toggle');
 					$('#navbar').load('template/navbar.php');
 				}
@@ -114,6 +114,8 @@ function doLogin(){
 		});
 	}
 }
+
+
 
 function doRegister(){
 	name = $('#registerMember').find( "input[name='name']" ).val();
@@ -183,7 +185,30 @@ function deleteCart(id,size){
 	});
 	$('#cartModalContent').html(tableText);
 	$('#cartModalContent').load('handler/master_modal.php?act=viewCart');
+	$('#checkoutList').load('handler/table_checkout.php');
+
 }
+
+
+function deleteTableCart(id,size){
+	$.ajax({    //create an ajax request to load_page.php
+		type: "POST",
+		url: "handler/update_cart.php?act=delete&id="+id,
+		dataType: "html",
+		data: { 'service_size': size },   //expect html to be returned
+		success: function(response){
+			if(response!=""){
+				alert(response);
+			}
+		}
+
+	});
+	$('#checkoutList').html(tableText);
+	$('#navbar').load('template/navbar.php');
+	$('#checkoutList').load('handler/table_checkout.php');
+	
+}
+
 
 
 
