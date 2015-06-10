@@ -7,7 +7,8 @@ if (isset($_GET['f']) or isset($_GET['logout'])) {
 	} elseif ($konten_filter == 'contact') {
 		include "halaman/contact.php";
 	} else {
-		$sql = "SELECT s.service_id, sd.service_name, sd.service_desc, s.service_price, s.service_size from service_det sd join service s on sd.service_ID=s.service_ID where service_name='" . $konten_filter . "'";
+		$sql = "SELECT s.service_id, sd.service_name, sd.service_desc, s.service_price, s.service_size 
+		from service_det sd join service s on sd.service_ID=s.service_ID where service_name='" . $konten_filter . "'";
 		$result = mysqli_query($conn, $sql);
 		if (mysqli_num_rows($result) > 0) {
 			echo '	<h4 class="konten-filter-title">' . $konten_filter . '</h4>
@@ -20,7 +21,8 @@ if (isset($_GET['f']) or isset($_GET['logout'])) {
 					<tr><td width="30%"><b>Ukuran</b></td><td width="30%"><b>Harga</b></td></tr>';
 
 			while ($row = mysqli_fetch_assoc($result)) {
-				echo '<tr><td>' . $row["service_size"] . '</td><td>Rp ' . number_format($row["service_price"], 0, "", ".") . '</td><td style="padding-top:5px;"></td><td style="padding-top:5px;"><button class="btn btn-success btn-sm" onclick=addCart("' . md5($row['service_id']) . '","' . md5($row['service_size']) . '")>add to cart</button></td></tr>';
+				echo '<tr><td>' . $row["service_size"] . '</td><td>Rp ' . number_format($row["service_price"], 0, "", ".") . '</td><td style="padding-top:5px;"></td>
+						<td style="padding-top:5px;"><button class="btn btn-success btn-sm" onclick=addCart("' . md5($row['service_id']) . '","' . md5($row['service_size']) . '")>add to cart</button></td></tr>';
 				$desc = $row['service_desc'];
 			}
 			echo '

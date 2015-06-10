@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-xs-12">
-		<h3><i class="fa fa-key"></i> Detil Layanan</h3>
+		<h3><i class="fa fa-picture-o"></i> Gambar Layanan</h3>
 		<br>
 	</div>
 </div>

@@ -22,16 +22,15 @@ include "template/navbar.php";
 				<div class="col-md-9">
 
 					<div class="row">
-						<h3 class="konten-filter-title">Checkout</h3>
-						<hr></hr>
-						<div class="col-md-12">
+						<h4 class="konten-filter-title">Checkout</h4>
+						<div class="col-sm-12 col-lg-12 col-md-12">
 
-							<div id="checkoutList">
+							<div id="checkoutList" class="col-sm-12 col-lg-12 col-md-12 thumbnail panel-primary">
 								<?php
 
-	include "handler/table_checkout.php";
+									include "handler/table_checkout.php";
 
-	?>
+								?>
 							</div>
 						</div>
 					</div>

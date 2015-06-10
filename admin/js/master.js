@@ -19,9 +19,6 @@ function adminEditSave(id){
 	re_password=$('#editAdminForm').find( "input[name='re_password']" ).val();
 	error=$('#editAdminForm').find('.has-error').length;
 
-
-
-
 	if(namaD!="" && email!="" && error==0){
 		if((password!="" && re_password!="") || (password=="" && re_password=="")){
 			$('#adminModalContent').html(processText);

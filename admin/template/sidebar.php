@@ -17,15 +17,11 @@
 				<li><a class="ajax-link" href="#charts_google"><i class="fa fa-sign-out"></i> Selesai</a></li>
 			</ul>
 		</li>
-		<li class="dropdown">
-			<a href="#" class="dropdown-toggle">
+		<li>
+			<a href="#tables_datatables" class="ajax-link">
 				<i class="fa fa-book"></i>
 				<span class="hidden-xs">Laporan</span>
 			</a>
-			<ul class="dropdown-menu">
-				<li><a class="ajax-link" href="#charts_xcharts"><i class="fa fa-bar-chart-o"></i> Diagram</a></li>
-				<li><a class="ajax-link" href="#tables_datatables"><i class="fa fa-table"></i> Tabel</a></li>
-			</ul>
 		</li>
 		<li class="dropdown">
 			<a href="#" class="dropdown-toggle">
@@ -41,19 +37,19 @@
 					<ul class="dropdown-menu">
 						<li>
 							<a class="ajax-link" href="#data_service">
-								<i class="fa fa-folder"></i>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-folder"></i>
 								Dasar
 							</a>
 						</li>
 						<li>
 							<a class="ajax-link" href="#data_service_detail">
-								<i class="fa fa-folder-open"></i>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-folder-open"></i>
 								Rinci
 							</a>
 						</li>
 						<li>
 							<a class="ajax-link" href="#data_service_gambar">
-								<i class="fa fa-folder-open"></i>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-picture-o"></i>
 								Gambar
 							</a>
 						</li>
@@ -67,13 +63,13 @@
 					<ul class="dropdown-menu">
 						<li>
 							<a class="ajax-link" href="#data_admin">
-								<i class="fa fa-key"></i>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-key"></i>
 								Admin
 							</a>
 						</li>
 						<li>
 							<a class="ajax-link" href="#data_member">
-								<i class="fa fa-smile-o"></i>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-smile-o"></i>
 								Pelanggan
 							</a>
 						</li>

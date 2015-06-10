@@ -3,13 +3,13 @@ session_start();
 include "connection_handler.php";
 if (isset($_SESSION['transaksi'])) {
 	if (isset($_SESSION['member'])) {
-		echo "<div class='col-sm-12 col-md-12'><div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Hello! <strong> " . $_SESSION['member']['member_name'] . "</strong> There is your order details</div></div>";
+		echo "<div class='alert alert-info alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Hello! <strong> " . $_SESSION['member']['member_name'] . "</strong> There is your order details</div>";
 	} else {
-		echo "<div class='col-sm-12 col-md-12'><div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Attention!</strong> You are not logged in. Please login first or register if you haven't account</div></div>";
+		echo "<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Attention!</strong> You are not logged in. Please login first or register if you haven't account</div>";
 	}
 	?>
 
-
+<hr></hr>
 <form method="post" id="checkout"action="checkout.php">
 				<table class="table table-striped">
 					<thead>
@@ -25,8 +25,8 @@ foreach ($_SESSION["transaksi"] as $cart) {
 		echo '<tr>';
 		echo '<td>' . $cart['service_id'] . '</td>';
 		echo '<td>' . $cart['service_name'] . '</td>';
-		echo '<td>' . $cart['service_size'] . '</td>';
-		echo '<td>' . $cart['service_price'] . '</td>';
+		echo '<td>' . $cart['service_size'] . ' (mm)</td>';
+		echo '<td>Rp ' .number_format($cart["service_price"], 0, "", ".").'</td>';
 		echo '<td><a href="#" onclick=deleteTableCart("' . md5($cart['service_id']) . '","' . md5($cart['service_size']) . '")><i class="fa fa-trash-o" ></i></a></td>';
 		echo '</tr>';
 		$total += $cart['service_price'];
@@ -35,16 +35,16 @@ foreach ($_SESSION["transaksi"] as $cart) {
 	?>
 
 	</tbody>
-				</table>
-				<h4>Total :  <?php echo 'Rp. ' . number_format($total, 0, "", ".") . ''?></h4>
+				</table><hr></hr>
+				<center><h4><strong>Total :  <?php echo 'Rp. ' . number_format($total, 0, "", ".") . ''?></strong></h4>
 				<?php
 if (isset($_SESSION['member'])) {
-		echo '<button class="btn btn-primary pull-right" type="submit">';
+		echo '<button class="btn btn-primary" type="submit" style="margin-bottom:15px;">';
 		echo 'Konfirmasi';
 		echo '</button>';
 	}
 	?>
-
+</center>
 
 
 			</form>

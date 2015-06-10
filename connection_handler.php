@@ -1,8 +1,9 @@
 <?php
 
 $server = "localhost";
-$username = "root";
-$password = "andhika";
+$username = "ppweb_r1_kel1";
+$password = "P455w0rd";
+$database = "db_online_printing";
 
 $conn=mysqli_connect($server,$username,$password,$database) or die("Koneksi gagal");
 ?>
