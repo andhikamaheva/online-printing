@@ -97,6 +97,7 @@ if (isset($_GET['act'])) {
 						<th>Name</th>
 						<th>Size</th>
 						<th>Price</th>
+						<th>Qty</th>
 						<th>Delete</th>
 					</thead>
 					<tbody>
@@ -107,9 +108,10 @@ foreach ($_SESSION["transaksi"] as $cart) {
 				echo '<td>' . $cart['service_name'] . '</td>';
 				echo '<td>' . $cart['service_size'] . '</td>';
 				echo '<td>' . $cart['service_price'] . '</td>';
+				echo '<td>' . $cart['service_qty'] . '</td>';
 				echo '<td><a href="#" onclick=deleteCart("' . md5($cart['service_id']) . '","' . md5($cart['service_size']) . '")><i class="fa fa-trash-o" ></i></a></td>';
 				echo '</tr>';
-				$total += $cart['service_price'];
+				$total += $cart['service_price']*$cart['service_qty'];
 				$cart++;
 			}
 			?>

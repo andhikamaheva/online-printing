@@ -64,6 +64,7 @@ img.nav-logo{
 img.foto-konten{
 	margin-top:10%;
 	height:auto;
+	border:1px solid #337ab7;
 }
 
 img.foto-det{
@@ -72,4 +73,8 @@ img.foto-det{
 
 .konten-filter-title{
 	Margin-left:20px;
+}
+
+input[type="number"] {
+   width:30%;
 }

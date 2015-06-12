@@ -17,6 +17,7 @@ if (isset($_SESSION['transaksi'])) {
 						<th>Name</th>
 						<th>Size</th>
 						<th>Price</th>
+						<th>Jumlah</th>
 						<th>Delete</th>
 					</thead>
 					<tbody>
@@ -27,9 +28,10 @@ foreach ($_SESSION["transaksi"] as $cart) {
 		echo '<td>' . $cart['service_name'] . '</td>';
 		echo '<td>' . $cart['service_size'] . ' (mm)</td>';
 		echo '<td>Rp ' .number_format($cart["service_price"], 0, "", ".").'</td>';
+		echo '<td>' .$cart["service_qty"].'</td>';
 		echo '<td><a href="#" onclick=deleteTableCart("' . md5($cart['service_id']) . '","' . md5($cart['service_size']) . '")><i class="fa fa-trash-o" ></i></a></td>';
 		echo '</tr>';
-		$total += $cart['service_price'];
+		$total += $cart['service_price']*$cart["service_qty"];
 		$cart++;
 	}
 	?>

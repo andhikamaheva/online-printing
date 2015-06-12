@@ -197,9 +197,11 @@ function loadNavbar(){
 
 
 function addCart(id,size){
+	qty=document.getElementById("qty"+size).value;
+	
 	$.ajax({    //create an ajax request to load_page.php
 		type: "POST",
-		url: "handler/add_cart.php?act=cart&id="+id,
+		url: "handler/add_cart.php?act=cart&id="+id+"&qty="+qty,
 		dataType: "html",
 		data: { 'service_size': size },   //expect html to be returned
 		success: function(response){
