@@ -18,21 +18,23 @@ if (isset($_SESSION['transaksi'])) {
 						<th>Size</th>
 						<th>Price</th>
 						<th>Jumlah</th>
-						<th>Delete</th>
+						<th>File</th>
 					</thead>
 					<tbody>
 						<?php
+$x=1;
 foreach ($_SESSION["transaksi"] as $cart) {
 		echo '<tr>';
-		echo '<td>' . $cart['service_id'] . '</td>';
-		echo '<td>' . $cart['service_name'] . '</td>';
+		echo '<td><center>' . $cart['service_id'] . '</center></td>';
+		echo '<td width="20%">' . $cart['service_name'] . '</td>';
 		echo '<td>' . $cart['service_size'] . ' (mm)</td>';
 		echo '<td>Rp ' .number_format($cart["service_price"], 0, "", ".").'</td>';
-		echo '<td>' .$cart["service_qty"].'</td>';
-		echo '<td><a href="#" onclick=deleteTableCart("' . md5($cart['service_id']) . '","' . md5($cart['service_size']) . '")><i class="fa fa-trash-o" ></i></a></td>';
+		echo '<td><center>' .$cart["service_qty"].'</center></td>';
+		echo '<td><input type="file" name="file'.$x.'"/></td>';
 		echo '</tr>';
 		$total += $cart['service_price']*$cart["service_qty"];
 		$cart++;
+		$x++;
 	}
 	?>
 

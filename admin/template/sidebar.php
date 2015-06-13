@@ -12,7 +12,7 @@
 				<span class="hidden-xs">Transaksi</span>
 			</a>
 			<ul class="dropdown-menu">
-				<li><a class="ajax-link" href="#charts_xcharts"><i class="fa fa-sign-in"></i> Masuk</a></li>
+				<li><a class="ajax-link" href="#data_masuk"><i class="fa fa-sign-in"></i> Masuk</a></li>
 				<li><a class="ajax-link" href="#charts_flot"><i class="fa fa-refresh"></i> Proses</a></li>
 				<li><a class="ajax-link" href="#charts_google"><i class="fa fa-sign-out"></i> Selesai</a></li>
 			</ul>

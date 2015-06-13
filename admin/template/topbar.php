@@ -17,18 +17,39 @@
 					</div>
 					<div class="col-xs-4 col-sm-8 top-panel-right">
 						<ul class="nav navbar-nav pull-right panel-menu">
+							<?php
+								include "../handler/connection_handler.php";
+								$query="SELECT transaksi_ID FROM db_online_printing.transaksi WHERE transaksi_approve is null and transaksi_close is null";
+								$result=mysqli_query($conn,$query);
+								$jml=mysqli_num_rows($result);
+								mysqli_close($conn);
+								if($jml>0){
+							?>
 							<li class="hidden-xs">
-								<a href="./" class="modal-link">
+								<a href="#data_masuk" class="ajax-link">
 									<i class="fa fa-sign-in"></i>
-									<span class="badge">7</span>
+									<span class="badge"><?php echo $jml;?></span>
 								</a>
 							</li>
+							<?php
+								}
+								
+								include "../handler/connection_handler.php";
+								$query="SELECT transaksi_ID FROM db_online_printing.transaksi WHERE transaksi_approve is null and transaksi_close is null and transaksi_payment is not null";
+								$result=mysqli_query($conn,$query);
+								$jml=mysqli_num_rows($result);
+								mysqli_close($conn);
+								if($jml>0){
+							?>
 							<li class="hidden-xs">
-								<a class="ajax-link" href="content/calendar.php">
+								<a class="ajax-link" href="#data_masuk">
 									<i class="fa fa-money"></i>
-									<span class="badge">7</span>
+									<span class="badge"><?php echo $jml;?></span>
 								</a>
 							</li>
+							<?php
+								}
+							?>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle account" data-toggle="dropdown">
 									<div class="avatar">

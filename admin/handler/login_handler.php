@@ -13,6 +13,7 @@ if($ketemu==1){
 	$data=mysqli_fetch_array($result);
 	mysqli_close($conn);
 	session_start();
+	setcookie('admin', json_encode($data), time()+60*60*24*100,'/');
 	$_SESSION['admin']=$data;
 	header('location: ../');
 }else{

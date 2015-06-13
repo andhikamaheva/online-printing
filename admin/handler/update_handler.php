@@ -35,6 +35,18 @@ if(isset($_GET['t'])){
 		$service_size=$_POST["service_size"];
 		$query="UPDATE service SET service_ID='".$service_id."', service_price= '".$service_price."', service_size = '".$service_size."' where md5(service_id) = '".$id."' and md5(service_size) = '".$size."'";
 	}
+	elseif($_GET['t']=='trxApv'){
+		$transaksi_ID=$_POST["transaksi_ID"];
+		$admin_username=$_POST["admin_username"];
+		
+		$query="UPDATE transaksi SET admin_admin_username='".$admin_username."', transaksi_approve=now() where md5(transaksi_ID) = '".$transaksi_ID."'";
+	}
+	elseif($_GET['t']=='trxDcl'){
+		$transaksi_ID=$_POST["transaksi_ID"];
+		$admin_username=$_SESSION['admin']['admin_username'];
+		
+		$query="UPDATE transaksi SET admin_admin_username='".$admin_username."', transaksi_close=now() where md5(transaksi_ID) = '".$transaksi_ID."'";
+	}
 	$result=mysqli_query($conn,$query);
 	$error=mysqli_error($conn);
 	mysqli_close($conn);

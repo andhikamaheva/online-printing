@@ -377,3 +377,35 @@ function serviceDetDeleteConf(id,size){
 		}
 	});
 }
+
+function imgByr(id){
+	$('#transaksiModalLabel').html('Bukti Pembayaran');
+	$('#transaksiModalContent').html(loadingText);
+	$('#transaksiModal').modal('toggle');
+	$.ajax({    //create an ajax request to load_page.php
+		type: "POST",
+		url: "handler/select_handler.php?t=imgByr",
+		dataType: "html",
+		data: { 'transaksi_ID': id },   //expect html to be returned
+		success: function(response){
+			$('#transaksiModalContent').html(response);
+		}
+	});
+	return false;
+}
+
+function transaksiApv(id){
+	$('#transaksiModalLabel').html('Bukti Pembayaran');
+	$('#transaksiModalContent').html(loadingText);
+	$('#transaksiModal').modal('toggle');
+	$.ajax({    //create an ajax request to load_page.php
+		type: "POST",
+		url: "handler/select_handler.php?t=imgByr",
+		dataType: "html",
+		data: { 'transaksi_ID': id },   //expect html to be returned
+		success: function(response){
+			$('#transaksiModalContent').html(response);
+		}
+	});
+	return false;
+}
