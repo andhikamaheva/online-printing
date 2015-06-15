@@ -10,7 +10,7 @@ if (isset($_SESSION['transaksi'])) {
 	?>
 
 <hr></hr>
-<form method="post" id="checkout"action="checkout.php">
+<form method="post" id="checkout" action="handler/final_CO.php">
 				<table class="table table-striped">
 					<thead>
 						<th>Service ID</th>
@@ -30,7 +30,7 @@ foreach ($_SESSION["transaksi"] as $cart) {
 		echo '<td>' . $cart['service_size'] . ' (mm)</td>';
 		echo '<td>Rp ' .number_format($cart["service_price"], 0, "", ".").'</td>';
 		echo '<td><center>' .$cart["service_qty"].'</center></td>';
-		echo '<td><input type="file" name="file'.$x.'"/></td>';
+		echo '<td><input type="file" name="file'.$x.'" required/></td>';
 		echo '</tr>';
 		$total += $cart['service_price']*$cart["service_qty"];
 		$cart++;

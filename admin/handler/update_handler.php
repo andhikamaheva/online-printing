@@ -37,7 +37,7 @@ if(isset($_GET['t'])){
 	}
 	elseif($_GET['t']=='trxApv'){
 		$transaksi_ID=$_POST["transaksi_ID"];
-		$admin_username=$_POST["admin_username"];
+		$admin_username=$_SESSION['admin']['admin_username'];
 		
 		$query="UPDATE transaksi SET admin_admin_username='".$admin_username."', transaksi_approve=now() where md5(transaksi_ID) = '".$transaksi_ID."'";
 	}

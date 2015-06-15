@@ -20,35 +20,35 @@
 			<div id="ow-marketplace" class="col-sm-12 col-md-6">
 				<div class="row">
 					<div class="col-xs-12">
-						<h4 class="page-header">PENJUALAN</h4>
+						<h4 class="page-header">PENJUALAN HARIAN</h4>
 						<table id="ticker-table" class="table m-table table-bordered table-hover table-heading">
 							<thead>
 								<tr>
 									<th>Layanan</th>
+									<th>Jumlah</th>
 									<th>Perubahan</th>
-									<th>Mingguan</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td class="m-ticker"><b>BRDM</b><span>Broadem Inc.</span></td>
+									<td class="m-change">1.45</td>
 									<td class="m-change"><i class="fa fa-angle-up"></i> 1.45 (27&#37;)</td>
-									<td class="td-graph"></td>
 								</tr>
 								<tr>
 									<td class="m-ticker"><b>ASWLL</b><span>Aswell Corp.</span></td>
+									<td class="m-change">6.32</td>
 									<td class="m-change"><i class="fa fa-angle-up"></i> 6.32 (12&#37;)</td>
-									<td class="td-graph"></td>
 								</tr>
 								<tr>
 									<td class="m-ticker"><b>MIXL</b><span>Mixal LTD.</span></td>
+									<td class="m-change">7.2</td>
 									<td class="m-change"><i class="fa fa-angle-down"></i> 7.2 (12&#37;)</td>
-									<td class="td-graph"></td>
 								</tr>
 								<tr>
 									<td class="m-ticker"><b>LMPRD</b><span>L.A. Prod.</span></td>
+									<td class="m-change">5.3</td>
 									<td class="m-change"><i class="fa fa-angle-up"></i> 5.3 (18&#37;)</td>
-									<td class="td-graph"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -61,15 +61,31 @@
 					<div class="col-xs-12">
 						<h4 class="page-header">&Sigma; RINGKASAN</h4>
 						<div class="row">
+							<?php
+								include "../handler/connection_handler.php";
+								$query="SELECT minta.jmlM, proses.jmlP, tolak.jmlT
+												FROM	(SELECT count(transaksi_ID) jmlM
+														FROM db_online_printing.transaksi) as minta,
+														(SELECT count(transaksi_ID) jmlP
+														FROM db_online_printing.transaksi
+														WHERE transaksi_approve is not null) as proses,
+														(SELECT count(transaksi_ID) as jmlT
+														FROM db_online_printing.transaksi
+														WHERE transaksi_approve is null
+															and transaksi_close is not null) as tolak";
+								$result=mysqli_query($conn,$query);
+								$jml=mysqli_fetch_array($result);
+								mysqli_close($conn);
+							?>
 							<div class="col-xs-12">
 								<div class="row">
-									<div class="col-xs-12">Total Permintaan<b>1245634</b></div>
+									<div class="col-xs-12">Total Permintaan<b><?php echo $jml['jmlM']; ?></b></div>
 								</div>
 								<div class="row">
-									<div class="col-xs-12">Total Proses<b>1245634</b></div>
+									<div class="col-xs-12">Total Proses<b><?php echo $jml['jmlP']; ?></b></div>
 								</div>
 								<div class="row">
-									<div class="col-xs-12">Total Penolakan<b>227</b></div>
+									<div class="col-xs-12">Total Penolakan<b><?php echo $jml['jmlP']; ?></b></div>
 								</div>
 							</div>
 						</div>
@@ -77,7 +93,7 @@
 				</div>
 				<div id="ow-donut" class="row">
 					<div class="col-xs-12">
-						<h4 class="page-header">&Sigma; RINGKASAN</h4>
+						<h4 class="page-header">&#37; Prosentase</h4>
 						<div class="row">
 							<div class="col-sm-6">
 								<div id="morris_donut_1" style="width:120px;height:120px;"></div>

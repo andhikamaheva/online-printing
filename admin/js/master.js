@@ -395,16 +395,40 @@ function imgByr(id){
 }
 
 function transaksiApv(id){
-	$('#transaksiModalLabel').html('Bukti Pembayaran');
-	$('#transaksiModalContent').html(loadingText);
-	$('#transaksiModal').modal('toggle');
 	$.ajax({    //create an ajax request to load_page.php
 		type: "POST",
-		url: "handler/select_handler.php?t=imgByr",
+		url: "handler/update_handler.php?t=trxApv",
 		dataType: "html",
 		data: { 'transaksi_ID': id },   //expect html to be returned
 		success: function(response){
-			$('#transaksiModalContent').html(response);
+			if(response!=''){
+				alert(response);
+			}else{
+				var hlm=window.location.hash.replace('#','');
+				$('#ajax-content').html(tableText);
+				$('#ajax-content').load('content/'+hlm+'.php');
+				$('#notif-box').load('template/notif.php');
+			}
+		}
+	});
+	return false;
+}
+
+function transaksiDcl(id){
+	$.ajax({    //create an ajax request to load_page.php
+		type: "POST",
+		url: "handler/update_handler.php?t=trxDcl",
+		dataType: "html",
+		data: { 'transaksi_ID': id },   //expect html to be returned
+		success: function(response){
+			if(response!=''){
+				alert(response);
+			}else{
+				var hlm=window.location.hash.replace('#','');
+				$('#ajax-content').html(tableText);
+				$('#ajax-content').load('content/'+hlm+'.php');
+				$('#notif-box').load('template/notif.php');
+			}
 		}
 	});
 	return false;

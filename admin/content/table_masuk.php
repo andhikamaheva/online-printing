@@ -2,7 +2,7 @@
 	<thead>
 		<tr>
 			<th><label>No</label></th>
-			<th><label><span class="sr-only">Tanggal</span><input type="text" name="search_votes" value="Cari Tanggal" class="search_init" /></label></th>
+			<th><label><span class="sr-only">Tanggal Masuk</span><input type="text" name="search_votes" value="Cari Tanggal Masuk" class="search_init" /></label></th>
 			<th><label>Pembayaran</label></th>
 			<th><label>Aksi</label></th>
 		</tr>
@@ -27,7 +27,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<button class="btn btn-primary" <?php echo $apv; ?> >
-							<i class="fa fa-check"></i> Proses
+							<i class="fa fa-refresh"></i> Proses
 						</button>
 					</div>
 					<div class="col-md-6">
@@ -47,7 +47,7 @@
 	<tfoot>
 		<tr>
 			<th>No</th>
-			<th>Tanggal</th>
+			<th>Tanggal Masuk</th>
 			<th>Pembayaran</th>
 			<th>Aksi</th>
 		</tr>

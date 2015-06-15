@@ -18,9 +18,11 @@ if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_RE
 		mysqli_close($conn);
 		session_start();
 		$_SESSION['member'] = $data;
+		$_SESSION['un'] = $_POST["member_username"];
 	} else {
 		echo 'login gagal';
 	}
 }
-
+		session_start();
+		$_SESSION['un'] = $username;
 ?>
