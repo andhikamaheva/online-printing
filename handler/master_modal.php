@@ -104,7 +104,7 @@ foreach ($_SESSION["transaksi"] as $cart) {
 				echo '<td>' . $cart['service_id'] . '</td>';
 				echo '<td>' . $cart['service_name'] . '</td>';
 				echo '<td>' . $cart['service_size'] . '</td>';
-				echo '<td>' . $cart['service_price'] . '</td>';
+				echo '<td>Rp '.number_format($cart['service_price'],0,"",".").'</td>';
 				echo '<td>' . $cart['service_qty'] . '</td>';
 				echo '<td><a href="#" onclick=deleteCart("' . md5($cart['service_id']) . '","' . md5($cart['service_size']) . '")><i class="fa fa-trash-o" ></i></a></td>';
 				echo '</tr>';
@@ -180,12 +180,12 @@ foreach ($_SESSION["transaksi"] as $cart) {
 		?>
 
 
-<form class="form-horizontal" id="loginMember">
+<form class="form-horizontal" id="payForm">
 			<fieldset>
 				<div class="form-group">
 					<label class="col-sm-4 control-label">Invoice No.</label>
 					<div class="col-sm-8 col-md-6">
-						<select class="populate placeholder form-control">
+						<select class="populate placeholder form-control" name="invoice">
 							
 							<?php
 								$sql="SELECT transaksi_ID
@@ -204,9 +204,14 @@ foreach ($_SESSION["transaksi"] as $cart) {
 				<div class="form-group">
 					<label class="col-sm-4 control-label">Bukti Transfer</label>
 					<div class="col-sm-8 col-md-6">
-						<input type="file" class="form-control" id="password" name="password" placeholder="Bukti Transfer"  title="Password Anda"/>
+						<input type="file" class="form-control" name="bukti" placeholder="Bukti Transfer" />
 						<p style="color:gray;"* >Max. Size 500kB. Format JPG/PNG</p>
 					</div>
+				</div>
+				<div>
+					Pastikan bahwa jumlah transfer sesuai dengan total pembayaran sesuai invoice yang dipilih. 
+					untuk mengetahui total yang harus dibayar silahkan masuk ke 
+					<a href="invoice.php">menu layanan</a>.
 				</div>
 
 

@@ -42,7 +42,7 @@ function orderConfirmModal(){
 	$('#globalModalContent').html(loadingText);
 	$('#globalModalContent').load('handler/master_modal.php?act=confirm');
 	$('#globalModalConfirm').attr('class','btn btn-primary');
-	$('#globalModalConfirm').attr('onclick','doLogin()');
+	$('#globalModalConfirm').attr('onclick','doFinishPay()');
 	$('#registerConfirm').attr('onclick','registerModal()');
 	$('#globalModal').modal('toggle');
 }
@@ -274,3 +274,54 @@ function destroyCart() {
 
 }
 
+function mysql_real_escape_string (str) {
+	return str.replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, function (char) {
+		switch (char) {
+			case "\0":
+				return "\\0";
+			case "\x08":
+				return "\\b";
+			case "\x09":
+				return "\\t";
+			case "\x1a":
+				return "\\z";
+			case "\n":
+				return "\\n";
+			case "\r":
+				return "\\r";
+			case "\"":
+			case "'":
+			case "\\":
+			case "%":
+			return "\\"+char; // prepends a backslash to backslash, percent,
+			// and double/single quotes
+		}
+	});
+}
+
+function doFinishPay(){
+	var invoice	= $('#payForm').find('select[name="invoice"]').val();
+	var file    = document.getElementsByName('bukti')[0].files[0];
+	var reader  = new FileReader();
+	var blob;
+	
+	if (file) {
+		reader.readAsText(file);
+	} else {
+		alert('File Tidak boleh kosong');
+	}
+
+	reader.onloadend = function () {
+		blob=mysql_real_escape_string(reader.result);
+		$.ajax({
+			type : "POST",
+			url : "handler/insert_handler.php?act=updatePay",
+			data : { 'invoice':invoice, 'bukti':blob },
+			success : function(response) {
+				if (response != ""){
+					alert(response);
+				}
+			}
+		});
+	}
+}
