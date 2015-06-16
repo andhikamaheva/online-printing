@@ -14,6 +14,9 @@ include "template/header.php";
 		<div id="navbar">
 			<?php
 include "template/navbar.php";
+	
+	$sql="SELECT transaksi_ID, transaksi_open, transaksi_approve, transaksi_close FROM transaksi where member_member_username='".$_SESSION['member']['member_username']."'";
+	$result = mysqli_query($conn, $sql);
 	?>
 		</div>
 		<!-- Page Content -->
@@ -28,12 +31,32 @@ include "template/navbar.php";
 							<table class="table table-striped">
 			<thead>
 				<th>Invoice No.</th>
-				<th>Name</th>
 				<th>Due Date</th>
 				<th>Status</th>
 				<th>Details</th>
 			</thead>
 			<tbody>
+			
+			<?php
+				while($row = mysqli_fetch_assoc($result)) {
+					$status='';
+					if($row["transaksi_approve"]==null and $row["transaksi_close"]==null){
+						$status='pending';
+					}elseif($row["transaksi_approve"]==null and $row["transaksi_close"]<>null){
+						$status='cancel';
+					}else{
+						$status='finish';
+					}
+					echo'
+					<tr>
+						<td>'.$row["transaksi_ID"].'</td>
+						<td>'.$row["transaksi_open"].'</td>
+						<td>'.$status.'</td>
+						<td></td>
+					</tr>';
+				}
+			?>
+			
 			</tbody>
 			</table>
 						</div>

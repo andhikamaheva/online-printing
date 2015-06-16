@@ -14,5 +14,5 @@
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
 	<script src="js/jquery.js"></script>
-<script src="js/devoops.js"></script>
+<!--<script src="js/devoops.js"></script>-->
 </head>

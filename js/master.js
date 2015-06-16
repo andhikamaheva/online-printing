@@ -106,8 +106,9 @@ function doLogin(){
 				else{
 					$('#globalModal').html(processText);
 					$('#checkoutList').load('handler/table_checkout.php');
-					$('#globalModal').modal('toggle');
 					$('#navbar').load('template/navbar.php');
+					$('#globalModal').modal('toggle');
+					$('.modal-backdrop').remove();
 				}
 			}
 		});

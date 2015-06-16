@@ -1,4 +1,3 @@
-<div class="col-md-3">
 	<h4>Services</h4>
 	<div class="list-group" style="max-height:500px;overflow-x:auto">
 		<?php
@@ -24,4 +23,3 @@
 			}
 		?>
 	</div>
-</div>

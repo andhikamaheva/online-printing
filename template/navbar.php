@@ -6,6 +6,7 @@ if (isset($_GET['logout'])) {
 		session_start();
 		unset($_SESSION['member']);
 		session_destroy();
+		header('location:./');
 	}
 }
 session_start();

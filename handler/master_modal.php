@@ -26,9 +26,6 @@ if (isset($_GET['act'])) {
 
 			</fieldset>
 		</form>
-		<script type="text/javascript">
-			LoadBootstrapValidatorScript(validationLoginMember);
-		</script>
 		<?php
 } else if ($action == 'register') {
 		?>
@@ -189,34 +186,19 @@ foreach ($_SESSION["transaksi"] as $cart) {
 					<label class="col-sm-4 control-label">Invoice No.</label>
 					<div class="col-sm-8 col-md-6">
 						<select class="populate placeholder form-control">
-							<option>LUG-001</option>
-							<option>LUG-002</option>
-							<option>LUG-003</option>
+							
+							<?php
+								$sql="SELECT transaksi_ID
+										FROM transaksi 
+										where member_member_username='".$_SESSION['member']['member_username']."'
+										and transaksi_close is NULL";
+								$result = mysqli_query($conn, $sql);
+								while($row = mysqli_fetch_assoc($result)) {
+									echo'<option>'.$row["transaksi_ID"].'</option>';
+								}
+							?>
+							
 						</select>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-4 control-label">Bank Tujuan</label>
-					<div class="col-sm-8 col-md-6">
-						<input type="radio" > BCA
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-4 control-label">Bank Asal</label>
-					<div class="col-sm-8 col-md-6">
-						<input type="text" class="form-control" autofocus="on" id="username" name="username" placeholder="BCA / BRI / CIMB dll" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-4 control-label">Norek. Pengirim</label>
-					<div class="col-sm-8 col-md-6">
-						<input type="text" class="form-control" autofocus="on" id="email" name="email" placeholder="xxxxxx" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-4 control-label">Atas Nama</label>
-					<div class="col-sm-8 col-md-6">
-						<input type="text" class="form-control" autofocus="on" id="address" name="address" placeholder="Nama Pengirim" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -224,18 +206,6 @@ foreach ($_SESSION["transaksi"] as $cart) {
 					<div class="col-sm-8 col-md-6">
 						<input type="file" class="form-control" id="password" name="password" placeholder="Bukti Transfer"  title="Password Anda"/>
 						<p style="color:gray;"* >Max. Size 500kB. Format JPG/PNG</p>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-4 control-label">Catatan</label>
-					<div class="col-sm-8 col-md-6">
-						<input type="password" class="form-control" id="password1" name="password1" placeholder="Masukkan Pesan"  title="Password Anda"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-4 control-label">Total</label>
-					<div class="col-sm-8 col-md-6">
-						<input type="text" class="form-control" autofocus="on" id="phone" name="phone" placeholder="Masukkan Total Transfer" />
 					</div>
 				</div>
 

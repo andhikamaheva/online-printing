@@ -3,10 +3,11 @@ session_start();
 if (isset($_GET['f']) or isset($_GET['logout'])) {
 	$konten_filter = $_GET['f'];
 	if ($konten_filter == 'about') {
-		include "halaman/about.php";
+		include "../halaman/about.php";
 	} elseif ($konten_filter == 'contact') {
-		include "halaman/contact.php";
+		include "../halaman/contact.php";
 	} else {
+		include "../handler/connection_handler.php";
 		$sql = "SELECT s.service_id, sd.service_name, sd.service_desc, s.service_price, s.service_size 
 		from service_det sd join service s on sd.service_ID=s.service_ID where service_name='" . $konten_filter . "'";
 		$result = mysqli_query($conn, $sql);
@@ -115,11 +116,7 @@ if (isset($_GET['f']) or isset($_GET['logout'])) {
 			}
 			echo '</div>
 					</div>';
-		} else {
-			header("location:index.php");
 		}
 	}
-} else {
-	header("location:index.php");
 }
 ?>

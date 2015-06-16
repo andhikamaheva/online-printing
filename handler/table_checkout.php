@@ -10,7 +10,7 @@ if (isset($_SESSION['transaksi'])) {
 	?>
 
 <hr></hr>
-<form method="post" id="checkout" action="handler/final_CO.php">
+<form method="post" id="checkout" action="handler/final_CO.php" enctype="multipart/form-data">
 				<table class="table table-striped">
 					<thead>
 						<th>Service ID</th>
