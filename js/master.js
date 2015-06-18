@@ -47,6 +47,15 @@ function orderConfirmModal(){
 	$('#globalModal').modal('toggle');
 }
 
+function detiltransaksi(det){
+	$('#globalModalLabel').html('Detil Transaksi');
+	$('#globalModalConfirm').html('kembali');
+	$('#globalModalContent').html(loadingText);
+	$('#globalModalContent').load('handler/master_modal.php?act=dtrans&id='+det);
+	$('#globalModalConfirm').attr('onclick','data-dismiss');
+	$('#globalModal').modal('toggle');
+}
+
 
 function loadRegisterModal(){
 	$('#globalModalLabel').html('Register');

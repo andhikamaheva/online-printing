@@ -57,8 +57,10 @@ include "template/navbar.php";
 						$status='pending';
 					}elseif($row["transaksi_approve"]==null and $row["transaksi_close"]<>null){
 						$status='cancel';
+					}elseif($row["transaksi_approve"]<>null and $row["transaksi_close"]==null){
+						$status='process';
 					}else{
-						$status='finish';
+						$status='<font color="green">finish</font>';
 					}
 					echo'
 					<tr>
@@ -66,7 +68,7 @@ include "template/navbar.php";
 						<td>'.$row["transaksi_open"].'</td>
 						<td> Rp '.number_format($total,0,"",".").'</td>
 						<td>'.$status.'</td>
-						<td></td>
+						<td><a href="#" onclick="detiltransaksi('.$row["transaksi_ID"].')">detail transaksi</a></td>
 					</tr>';
 				}
 			?>
