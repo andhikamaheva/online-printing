@@ -19,7 +19,7 @@
 			</ul>
 		</li>
 		<li>
-			<a href="#tables_datatables" class="ajax-link">
+			<a href="#data_laporan" class="ajax-link">
 				<i class="fa fa-book"></i>
 				<span class="hidden-xs">Laporan</span>
 			</a>

@@ -118,5 +118,5 @@ if (isset($_GET['f']) or isset($_GET['logout'])) {
 					</div>';
 		}
 	}
-}
+}mysqli_close($conn);
 ?>

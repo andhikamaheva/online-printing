@@ -25,5 +25,5 @@ if (isset($_GET['act'])) {
 		$_SESSION["transaksi"] = $service;
 	}
 }
-
+mysqli_close($conn);
 ?>

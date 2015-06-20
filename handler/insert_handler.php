@@ -66,19 +66,18 @@ if (isset($_GET['act'])) {
 		}
 	} else if ($_GET['act'] == 'updatePay') {
 		$invoice = $_POST['invoice'];
-		$bukti = $_POST['bukti'];
+		$bukti = mysqli_real_escape_string($conn,base64_decode($_POST['bukti']));
 		
-		$sql="	UPDATE transaksi SET
+		$sql="UPDATE transaksi SET
 				transaksi_payment='".$bukti."'
 				WHERE transaksi_ID='".$invoice."'";
 		$result = mysqli_query($conn, $sql);
 		if (!$result){
 			echo "Error!!!!".mysqli_error($conn);
 		}
-//		echo $bukti;
-		
+		echo 'Upload Berhasil';
 	}
 
 }
-
+mysqli_close($conn);
 ?>

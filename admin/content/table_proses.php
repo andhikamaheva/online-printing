@@ -21,7 +21,7 @@
 	?>
 		<tr>
 			<td><?php echo $nom;?></td>
-			<td><?php echo $data['transaksi_approve']; ?></td>
+			<td><?php echo date("l, d F Y (H:i:s)", strtotime($data['transaksi_approve'])); ?></td>
 			<td><?php echo $data['member_name']; ?></td>
 			<td><center>
 				<div class="row">

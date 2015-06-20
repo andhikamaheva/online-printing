@@ -58,3 +58,6 @@ include "navbar.php";
 		</script>
 	</body>
 </html>
+<?php
+mysqli_close($conn);
+?>

@@ -57,5 +57,5 @@ if (isset($_SESSION['member'])) {
 } else {
 	?>
 <center><h3>Tidak Ada Transaksi</h3></center>
-<?php }
+<?php }mysqli_close($conn);
 ?>

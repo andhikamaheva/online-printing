@@ -91,7 +91,7 @@ if (isset($_SESSION['member'])) {
 				</ul>
 			</li>
 			';
-}
+}mysqli_close($conn);
 ?>
 
 	</ul>

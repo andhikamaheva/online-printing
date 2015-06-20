@@ -22,7 +22,7 @@
 											<img src="data:image/png;base64,'.base64_encode($row['gbr']).'" style="min-height:200px;min-width:200px" 
 											class="foto-konten "></a>';
 								}
-								echo '<h4><a href="produk.php?f='.$row["service_name"].'">'.$row["service_name"].'</a></h4>';
+								echo '<h4><a href="produk.php?f='.$row["service_name"].'" style="text-decoration: none;">'.$row["service_name"].'</a></h4>';
 								if($row["maxsp"] == $row["minsp"]){
 									echo '<h4>Rp '.number_format($row["minsp"],0,"",".").'</h4>';
 								}
@@ -39,4 +39,5 @@
 	} else {
 	echo "0 results";
 	}
+	mysqli_close($conn);
 ?>

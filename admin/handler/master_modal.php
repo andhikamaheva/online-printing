@@ -171,7 +171,7 @@
 	}
 
 
-		else if($_GET['p']=='deleteServiceDet' and isset($_GET['id'])){
+	else if($_GET['p']=='deleteServiceDet' and isset($_GET['id'])){
 		$id=$_GET['id'];
 		$size=$_GET['size'];
 		include "../handler/connection_handler.php";
@@ -183,5 +183,60 @@
 ?>
 		Yakin ingin hapus data <strong><em><?php echo $data['service_name']; ?></em></strong> dengan ukuran <strong><em><?php echo $data['service_size']; ?></em></strong>?
 <?php
+	}else if($_GET['p']=='dtrans'){
+		include "../handler/connection_handler.php";
+		$query="	SELECT transaksi_ID, transaksi_open, transaksi_approve, transaksi_close 
+					FROM transaksi WHERE transaksi_ID=".$_GET['id'];
+		$result=mysqli_query($conn,$query);
+		$row = mysqli_fetch_array($result);
+		$invoice = $row["transaksi_ID"];
+		$open = $row["transaksi_open"];
+		$approve = "-";
+		$close = "-";
+		if($row["transaksi_approve"]<>null){
+			$approve=$row["transaksi_approve"];
+		}
+		if($row["transaksi_close"]<>null){
+			$approve=$row["transaksi_close"];
+		}
+		?>
+		<div>
+			<div><div class="col-md-4"><b>Invoice</b></div><div class="col-md-8">: <?php echo $invoice;?></div></div>
+			<div><div class="col-md-4"><b>Date In</b></div><div class="col-md-8">: <?php echo $open;?></div></div>
+			<div><div class="col-md-4"><b>Date Approve</b></div><div class="col-md-8">: <?php echo $approve;?></div></div>
+			<div><div class="col-md-4"><b>Date Finish</b></div><div class="col-md-8">: <?php echo $close;?></div></div>
+		</div>
+		<table width="100%"  border=1 frame=hsides rules=rows>
+			<thead>
+				<th><font color="red">Name</font></th>
+				<th><font color="red">Size</font></th>
+				<th><font color="red">Quantity</font></th>
+				<th><font color="red">Price</font></th>
+				<th><font color="red">SubTotal</font></th>
+			</thead>
+			<tbody>
+		<?php
+		$query="	SELECT service_id, size, quantity, price 
+				FROM transaksi_det
+				WHERE transaksi_ID=".$_GET['id'];
+		$result = mysqli_query($conn, $query);
+		$total=0;
+		while($row = mysqli_fetch_array($result)) {
+			$snama = executeScalar("SELECT service_name from service_det where service_id='".$row["service_id"]."'");
+			echo'
+				<tr>
+					<td>'.$snama.'</td>
+					<td>'.$row["size"].'</td>
+					<td>'.$row["quantity"].'</td>
+					<td>Rp '.number_format($row["price"], 0, "", ".").'</td>
+					<td>Rp '.number_format(($row["quantity"]*$row["price"]), 0, "", ".").'</td>
+				</tr>';
+				$total+=($row["quantity"]*$row["price"]);
+		}?>
+			</tbody>
+		</table><br>
+		<div><strong>total = Rp <?php echo number_format($total, 0, "", ".");?></strong></div>
+		<?php
+		mysqli_close($conn);
 	}
 ?>

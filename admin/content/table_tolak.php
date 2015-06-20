@@ -22,9 +22,9 @@
 	?>
 		<tr>
 			<td><?php echo $nom;?></td>
-			<td><?php echo $data['transaksi_open']; ?></td>
+			<td><?php echo date("l, d F Y (H:i:s)", strtotime($data['transaksi_open'])); ?></td>
 			<td><?php echo $data['member_name']; ?></td>
-			<td><?php echo $data['transaksi_close']; ?></td>
+			<td><?php echo date("l, d F Y (H:i:s)", strtotime($data['transaksi_close'])); ?></td>
 			<td><?php echo $data['admin_name']; ?></td>
 		</tr>
 	<?php

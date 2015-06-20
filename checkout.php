@@ -127,6 +127,6 @@ include "template/navbar.php";
 	</body>
 	</html>
 	<?php
-}
+mysqli_close($conn);}
 ?>
 

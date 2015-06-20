@@ -52,7 +52,7 @@ function detiltransaksi(det){
 	$('#globalModalConfirm').html('kembali');
 	$('#globalModalContent').html(loadingText);
 	$('#globalModalContent').load('handler/master_modal.php?act=dtrans&id='+det);
-	$('#globalModalConfirm').attr('onclick','data-dismiss');
+	$('#globalModalConfirm').attr('onclick','orderConfirmModal()');
 	$('#globalModal').modal('toggle');
 }
 
@@ -315,13 +315,14 @@ function doFinishPay(){
 	var blob;
 	
 	if (file) {
-		reader.readAsText(file);
+		reader.readAsDataURL(file);
 	} else {
 		alert('File Tidak boleh kosong');
 	}
 
 	reader.onloadend = function () {
-		blob=mysql_real_escape_string(reader.result);
+		blob=reader.result;
+		blob=blob.split('base64,')[1];
 		$.ajax({
 			type : "POST",
 			url : "handler/insert_handler.php?act=updatePay",

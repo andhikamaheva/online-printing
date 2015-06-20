@@ -12,6 +12,14 @@ function adminEdit(id){
 	$('#adminModal').modal('toggle');
 }
 
+function detiltransaksi(det){
+	$('#adminModalLabel').html('Detil Transaksi');
+	$('#adminModalContent').html(loadingText);
+	$('#adminModalContent').load('handler/master_modal.php?p=dtrans&id='+det);
+	$('#adminModalConfirm').attr('onclick','orderConfirmModal()');
+	$('#adminModal').modal('toggle');
+}
+
 function adminEditSave(id){
 	namaD=$('#editAdminForm').find( "input[name='namaD']" ).val();
 	email=$('#editAdminForm').find( "input[name='email']" ).val();
@@ -432,4 +440,143 @@ function transaksiDcl(id){
 		}
 	});
 	return false;
+}
+
+function LoadPelanggan(){
+	$.ajax({    //create an ajax request to load_page.php
+		type: "POST",
+		url: "handler/select_handler.php?t=pelDash",
+		dataType: "html",
+		data: { 'dummy': 'dummy' },   //expect html to be returned
+		success: function(response){
+			if(response!=''){
+				$('#dashboard-clients').html(response);
+			}
+		}
+	});
+}
+
+function LoadPenjualan(){
+	$.ajax({    //create an ajax request to load_page.php
+		type: "POST",
+		url: "handler/select_handler.php?t=penDash",
+		dataType: "html",
+		data: { 'dummy': 'dummy' },   //expect html to be returned
+		success: function(response){
+			if(response!=''){
+				$('#dashboard-penjualan').html(response);
+			}
+		}
+	});
+}
+
+function LoadMorrisScripts(callback){
+	function LoadMorrisScript(){
+		if(!$.fn.Morris){
+			$.getScript('plugins/morris/morris.min.js', callback);
+		}
+		else {
+			if (callback && typeof(callback) === "function") {
+				callback();
+			}
+		}
+	}
+	if (!$.fn.raphael){
+		$.getScript('plugins/raphael/raphael-min.js', LoadMorrisScript);
+	}
+	else {
+		LoadMorrisScript();
+	}
+}
+
+function ChartDashboard(){
+	$.ajax({    //create an ajax request to load_page.php
+		type: "POST",
+		dataType: "json",
+		url: "handler/select_handler.php?t=statDash",
+		data: { 'dummy': 'dummy' },   //expect html to be returned
+		success: function(response){
+			if(response!=''){
+				Morris.Line({
+					element: 'stat-graph',
+					data: response,
+					xkey: 'period',
+					ykeys: ['Ditolak', 'Diproses'],
+					labels: ['Ditolak', 'Diproses'],
+					xLabelFormat: function (x) { return dateFormatter(x).toString(); },
+					dateFormat: function (x) { return dateFormatter(x).toString(); }
+				});
+			}
+		}
+	});
+	
+	//--------------------------------------------------------------------------------------- DONUT
+	$.ajax({    //create an ajax request to load_page.php
+		type: "POST",
+		dataType: "json",
+		url: "handler/select_handler.php?t=statDonut",
+		data: { 'dummy': 'dummy' },   //expect html to be returned
+		success: function(response){
+			if(response!=''){
+				Morris.Donut({
+					element: 'morris_donut_1',
+					data: response,
+					xkey: 'period',
+					formatter: function (x, data) { return data.formatted; }
+				});
+			}
+		}
+	});
+	//-------------------------------------------------------------------------------------- DONUT
+	
+	$.ajax({    //create an ajax request to load_page.php
+		type: "POST",
+		dataType: "json",
+		url: "handler/select_handler.php?t=statDonut1",
+		data: { 'dummy': 'dummy' },   //expect html to be returned
+		success: function(response){
+			if(response!=''){
+				Morris.Donut({
+					element: 'morris_donut_2',
+					data: response,
+					xkey: 'period',
+					formatter: function (x, data) { return data.formatted; }
+				});
+			}
+		}
+	});
+	/*
+	Morris.Donut({
+		element: 'morris_donut_1',
+		data: [
+			{value: 10, label: 'Semua', formatted: 'Memproses 10%' },
+			{value: 90, label: 'Anda', formatted: 'Memproses 90%' }
+		],
+		formatter: function (x, data) { return data.formatted; }
+	});
+	*/
+	/*Morris.Donut({
+		element: 'morris_donut_2',
+		data: [
+			{value: 75, label: 'Semua', formatted: 'Menolak 75%' },
+			{value: 25, label: 'Anda', formatted: 'Menolak 25%' }
+		],
+		formatter: function (x, data) { return data.formatted; }
+	});*/
+}
+
+function dateFormatter(date){
+	var today = new Date(date);
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+
+	var yyyy = today.getFullYear();
+	if(dd<10){
+			dd='0'+dd
+	} 
+	if(mm<10){
+			mm='0'+mm
+	} 
+	var today = dd+'/'+mm+'/'+yyyy;
+	return today;
 }

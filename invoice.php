@@ -18,12 +18,12 @@ include "template/header.php";
 	<body>
 		<div id="navbar">
 			<?php
-include "template/navbar.php";
+	include "template/navbar.php";
 	
 	$sql="	SELECT transaksi_ID, transaksi_open, transaksi_approve, transaksi_close 
 			FROM transaksi 
 			where member_member_username='".$_SESSION['member']['member_username']."'";
-	$result = mysqli_query($conn, $sql);
+	$result = mysqli_query($mysqli, $sql);
 	
 	
 	?>
@@ -56,9 +56,9 @@ include "template/navbar.php";
 					if($row["transaksi_approve"]==null and $row["transaksi_close"]==null){
 						$status='pending';
 					}elseif($row["transaksi_approve"]==null and $row["transaksi_close"]<>null){
-						$status='cancel';
+						$status='<font color="red">cancel</font>';
 					}elseif($row["transaksi_approve"]<>null and $row["transaksi_close"]==null){
-						$status='process';
+						$status='<font color="blue">process</font>';
 					}else{
 						$status='<font color="green">finish</font>';
 					}
@@ -106,12 +106,15 @@ include "template/navbar.php";
 
 
 
-
+	
 	<?php
+	mysqli_close($conn);
+	mysqli_close($mysqli);
 } else {
 	//$return_url = base64_decode($current_url);
 	//echo $return_url;
-
+	mysqli_close($conn);
+	mysqli_close($mysqli);
 	header('Location: ' . base64_decode($_SESSION["url"]));
 }
 ?>

@@ -280,5 +280,5 @@ if (isset($_GET['act'])) {
 		<?php
 	}
 
-}
+}mysqli_close($conn);
 ?>

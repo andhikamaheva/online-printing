@@ -1,6 +1,7 @@
 	<h4>Services</h4>
 	<div class="list-group" style="max-height:500px;overflow-x:auto">
 		<?php
+			include 'connection_handler.php';
 			$sql="select service_name from service_det order by service_name";
 			$result = mysqli_query($conn, $sql);
 			if (mysqli_num_rows($result) > 0) {
@@ -21,5 +22,6 @@
 			} else {
 				echo "0 results";
 			}
+			mysqli_close($conn);
 		?>
 	</div>

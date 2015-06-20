@@ -47,6 +47,6 @@ if (isset($_GET['act'])) {
 			echo "Masukkan data yang valid";
 		}
 	}
-}
+}mysqli_close($conn);
 
 ?>
