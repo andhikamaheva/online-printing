@@ -13,11 +13,11 @@ function adminEdit(id){
 }
 
 function detiltransaksi(det){
-	$('#adminModalLabel').html('Detil Transaksi');
-	$('#adminModalContent').html(loadingText);
-	$('#adminModalContent').load('handler/master_modal.php?p=dtrans&id='+det);
-	$('#adminModalConfirm').attr('onclick','orderConfirmModal()');
-	$('#adminModal').modal('toggle');
+	$('#detilModalLabel').html('Detil Transaksi');
+	$('#detilModalContent').html(loadingText);
+	$('#detilModalContent').load('handler/master_modal.php?p=dtrans&id='+det);
+	$('#detilModalConfirm').attr('onclick','orderConfirmModal()');
+	$('#detilModal').modal('toggle');
 }
 
 function adminEditSave(id){

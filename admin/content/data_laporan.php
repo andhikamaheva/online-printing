@@ -27,7 +27,7 @@
 			}else{
 				$status='<font color="green">finish</font>';
 			}
-			$apv='onclick="detiltransaksi('.$data["id"].')"';
+			$apv='onclick=detiltransaksi("'.$data["id"].'")';
 			?>
 			<tr>
 				<td><?php echo $nom;?></td>
@@ -59,6 +59,19 @@
 		</tr>
 	</tfoot>
 </table>
+<div class="modal fade" id="detilModal" tabindex="-1" role="dialog" aria-labelledby="detilModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="detilModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body" id="detilModalContent">
+        ...
+      </div>
+    </div>
+  </div>
+</div>
 <script>
 	LoadDataTablesScripts(TableCustom);
 </script>
