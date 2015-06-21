@@ -1,7 +1,7 @@
 <?php
 session_start();
 function executeScalar($sql,$def=0){
-	include 'connection_handler.php';
+	include "../handler/connection_handler.php";
 	$rs = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 	if (mysqli_num_rows($rs)) {$r = mysqli_fetch_row($rs);mysqli_free_result($rs);return $r[0];}
 	return $def;

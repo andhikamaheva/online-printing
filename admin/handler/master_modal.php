@@ -1,4 +1,10 @@
 <?php
+function executeScalar($sql,$def=0){
+	include "connection_handler.php";
+	$rs = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+	if (mysqli_num_rows($rs)) {$r = mysqli_fetch_row($rs);mysqli_free_result($rs);return $r[0];}
+	return $def;
+}
 if ($_GET['p'] == 'editAdmin' and isset($_GET['id'])) {
     ?>
 		<form class="form-horizontal" id="editAdminForm">
@@ -212,11 +218,13 @@ $id = $_GET['id'];
 			</thead>
 			<tbody>
 		<?php
-$query = "	SELECT service_id, size, quantity, price
+
+$queryx = "SELECT service_id, size, quantity, price
 				FROM transaksi_det
-				WHERE transaksi_ID=" . $_GET['id'];
-    $result = mysqli_query($conn, $query);
+				WHERE transaksi_ID = ".$invoice."";
+    $result = mysqli_query($conn, $queryx);
     $total  = 0;
+
     while ($row = mysqli_fetch_array($result)) {
         $snama = executeScalar("SELECT service_name from service_det where service_id='" . $row["service_id"] . "'");
         echo '
