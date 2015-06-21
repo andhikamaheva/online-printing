@@ -23,7 +23,6 @@ if(isset($_GET['t'])){
 				group by member_member_username) as tl
 				on jt.member=tl.member
 				ORDER BY masuk desc,2,1";
-				
 		$return='';
 		$return.='<div class="row one-list-message">';
 			$return.='<div class="col-xs-1"><i class="fa fa-users"></i></div>';
@@ -33,7 +32,6 @@ if(isset($_GET['t'])){
 			$return.='<div class="col-xs-2">Pemasukan</div>';
 			$return.='<div class="col-xs-1">Terakhir</div>';
 		$return.='</div>';
-								
 		$result=mysqli_query($conn,$query);
 		while ($row = mysqli_fetch_assoc($result)) {
 			$return.='<div class="row one-list-message">';
@@ -82,7 +80,7 @@ if(isset($_GET['t'])){
 				(SELECT count(transaksi_close) as cls, date(transaksi_close) dc
 				from transaksi where transaksi_close is not null and transaksi_approve is null
 				group by date(transaksi_close)) as b on
-				a.da=b.dc";
+				a.da=b.dc LIMIT 7";
 		$result=mysqli_query($conn,$query);
 		while ($row = mysqli_fetch_assoc($result)) {
 			$array[]=$row;
