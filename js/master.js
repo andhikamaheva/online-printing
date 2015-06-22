@@ -43,8 +43,9 @@ function orderConfirmModal(){
 	$('#globalModalContent').load('handler/master_modal.php?act=confirm');
 	$('#globalModalConfirm').attr('class','btn btn-primary');
 	$('#globalModalConfirm').attr('onclick','doFinishPay()');
-	$('#registerConfirm').attr('onclick','registerModal()');
+	//$('#registerConfirm').attr('onclick','registerModal()');
 	$('#globalModal').modal('toggle');
+
 }
 
 function detiltransaksi(det){
@@ -334,4 +335,5 @@ function doFinishPay(){
 			}
 		});
 	}
+	$('#globalModal').modal('toggle');
 }
